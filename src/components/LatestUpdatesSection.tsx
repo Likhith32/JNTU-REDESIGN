@@ -17,6 +17,8 @@ import {
   Trash2,
   X,
   Video as VideoIcon,
+  AlertCircle,
+  Eye,
 } from "lucide-react";
 import {
   PressNote,
@@ -51,6 +53,8 @@ export function LatestUpdatesSection() {
   const [videoDirection, setVideoDirection] = useState(0);
   const [isHoveringVideo, setIsHoveringVideo] = useState(false);
   const [selectedModalVideo, setSelectedModalVideo] = useState<VideoItem | null>(null);
+  // Track thumbnail URL for each video
+  const [thumbnailUrls, setThumbnailUrls] = useState<Record<string, string>>({});
 
   // ── Admin Modal States ──
   const [showAddNoteModal, setShowAddNoteModal] = useState(false);
@@ -82,8 +86,19 @@ export function LatestUpdatesSection() {
   // Load and subscribe to live data
   useEffect(() => {
     const loadData = () => {
+      const loadedVideos = getActiveVideos();
       setPressNotes(getActivePressNotes());
-      setVideos(getActiveVideos());
+      setVideos(loadedVideos);
+
+      // Pre-load thumbnail URLs for all videos
+      const urls: Record<string, string> = {};
+      loadedVideos.forEach(video => {
+        if (video.youtubeId) {
+          // Start with maxres, will fallback if needed
+          urls[video.id] = `https://img.youtube.com/vi/${video.youtubeId}/maxresdefault.jpg`;
+        }
+      });
+      setThumbnailUrls(urls);
     };
     loadData();
 
@@ -99,7 +114,7 @@ export function LatestUpdatesSection() {
   const currentNote = pressNotes[activeNoteIndex] || pressNotes[0];
   const currentVideo = displayVideos[activeVideoIndex] || displayVideos[0];
 
-  // ── Auto-advance Video Carousel Every 3 Seconds (with pause on hover) ──
+  // ── Auto-advance Video Carousel Every 3 Seconds ──
   useEffect(() => {
     if (isHoveringVideo || Boolean(selectedModalVideo) || displayVideos.length <= 1) {
       return;
@@ -107,7 +122,7 @@ export function LatestUpdatesSection() {
     const interval = setInterval(() => {
       setVideoDirection(1);
       setActiveVideoIndex((prev) => (prev + 1) % displayVideos.length);
-    }, 3000); // 3 seconds vertical carousel transition
+    }, 3000);
 
     return () => clearInterval(interval);
   }, [isHoveringVideo, selectedModalVideo, displayVideos.length]);
@@ -199,7 +214,7 @@ export function LatestUpdatesSection() {
 
     const updated = savePressNoteToStorage(newNote);
     setPressNotes(updated);
-    setActiveNoteIndex(0); // Recent item comes first
+    setActiveNoteIndex(0);
     setShowAddNoteModal(false);
     toast.success("New Press Note published successfully! (Recent first)");
 
@@ -244,9 +259,15 @@ export function LatestUpdatesSection() {
 
     const updated = saveVideoToStorage(newVideo);
     setVideos(updated);
-    setActiveVideoIndex(0); // Recent item comes first
+    setActiveVideoIndex(0);
     setShowAddVideoModal(false);
     toast.success("New Video added successfully! (Recent first)");
+
+    // Set initial thumbnail URL
+    setThumbnailUrls(prev => ({
+      ...prev,
+      [newVideo.id]: `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
+    }));
 
     setNewVideoForm({
       title: "",
@@ -275,6 +296,47 @@ export function LatestUpdatesSection() {
       setActiveVideoIndex(0);
       toast.success("Video removed.");
     }
+  };
+
+  // ── Thumbnail URL Functions ──
+  const getThumbnailUrl = (videoId: string): string => {
+    if (!videoId) return "/images/hero-carousal/hero-campus.webp";
+
+    // Return the stored thumbnail URL or default to maxres
+    return thumbnailUrls[videoId] || `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+  };
+
+  // Handle thumbnail error - try fallback
+  const handleThumbnailError = (videoId: string, videoItemId: string) => {
+    const currentUrl = thumbnailUrls[videoItemId] || '';
+
+    // If currently using maxres, try hqdefault
+    if (currentUrl.includes('maxresdefault')) {
+      setThumbnailUrls(prev => ({
+        ...prev,
+        [videoItemId]: `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
+      }));
+    }
+    // If hqdefault fails, try sddefault
+    else if (currentUrl.includes('hqdefault')) {
+      setThumbnailUrls(prev => ({
+        ...prev,
+        [videoItemId]: `https://img.youtube.com/vi/${videoId}/sddefault.jpg`
+      }));
+    }
+    // If all fail, use a placeholder
+    else if (currentUrl.includes('sddefault')) {
+      setThumbnailUrls(prev => ({
+        ...prev,
+        [videoItemId]: '/images/hero-carousal/hero-campus.webp'
+      }));
+    }
+  };
+
+  // Check if using fallback thumbnail
+  const isUsingFallback = (videoItemId: string): boolean => {
+    const url = thumbnailUrls[videoItemId] || '';
+    return url.includes('hqdefault') || url.includes('sddefault') || url.includes('hero-campus.webp');
   };
 
   return (
@@ -336,9 +398,9 @@ export function LatestUpdatesSection() {
           </div>
         </RevealOnScroll>
 
-        {/* ── Two-Column Responsive Layout: 45% (Articles) vs 55% (Videos) ── */}
+        {/* ── Two-Column Responsive Layout ── */}
         <div className="mt-10 flex flex-col lg:flex-row gap-8 lg:gap-10 items-stretch">
-          {/* LEFT SIDE: 45% Width — Press Notes / News Carousel (Matching Image 2 Reference) */}
+          {/* LEFT SIDE: 45% Width — Press Notes */}
           <div className="w-full lg:w-[45%] flex flex-col justify-between">
             <RevealOnScroll delay={100} className="h-full flex flex-col justify-between">
               <div>
@@ -352,9 +414,7 @@ export function LatestUpdatesSection() {
                   </span>
                 </div>
 
-                {/* Stacked-Card Deck Container matching Image 2 */}
                 <div className="relative min-h-[400px] sm:min-h-[440px] flex flex-col justify-center">
-                  {/* Background Layer 2 (Deep stack curved) */}
                   <motion.div
                     aria-hidden
                     animate={{
@@ -365,7 +425,6 @@ export function LatestUpdatesSection() {
                     transition={{ duration: 0.35, ease: "easeOut" }}
                     className="absolute inset-0 bg-white/50 border border-slate-200/60 rounded-[36px] shadow-sm pointer-events-none hidden sm:block"
                   />
-                  {/* Background Layer 1 (Mid stack curved) */}
                   <motion.div
                     aria-hidden
                     animate={{
@@ -377,7 +436,6 @@ export function LatestUpdatesSection() {
                     className="absolute inset-0 bg-white/80 border border-slate-200/80 rounded-[36px] shadow-sm pointer-events-none hidden sm:block"
                   />
 
-                  {/* Active Card styled with Official Logo matching Image 2 */}
                   {currentNote ? (
                     <AnimatePresence mode="wait" custom={noteDirection}>
                       <motion.div
@@ -408,9 +466,7 @@ export function LatestUpdatesSection() {
                           className="group relative flex flex-col justify-between h-full min-h-[400px] sm:min-h-[440px] p-6 sm:p-8 md:p-9 rounded-[36px] bg-white border border-slate-200 shadow-[0_12px_40px_-15px_rgba(0,0,0,0.08)] hover:shadow-2xl hover:border-primary/40 transition-all duration-300 cursor-pointer overflow-hidden"
                         >
                           <div>
-                            {/* Top Layout: Logo on Left, Badges + Date on Right (Matching Image 2) */}
                             <div className="flex items-start gap-4 sm:gap-5 mb-5">
-                              {/* Official University Emblem */}
                               <div className="shrink-0 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-2xl bg-white border border-slate-200/90 p-1.5 sm:p-2 shadow-xs flex items-center justify-center group-hover:scale-105 transition-transform">
                                 <img
                                   src="/logo-circle.png"
@@ -419,7 +475,6 @@ export function LatestUpdatesSection() {
                                 />
                               </div>
 
-                              {/* Badges + Date Header */}
                               <div className="flex-1 min-w-0">
                                 <div className="flex flex-wrap items-center justify-between gap-2.5">
                                   <div className="flex items-center gap-2">
@@ -438,20 +493,17 @@ export function LatestUpdatesSection() {
                                   </div>
                                 </div>
 
-                                {/* Title (Matching serif/display typography in Image 2) */}
                                 <h3 className="mt-3.5 text-lg sm:text-xl md:text-[22px] font-extrabold font-display text-ink group-hover:text-primary transition-colors leading-snug tracking-tight">
                                   {currentNote.title}
                                 </h3>
                               </div>
                             </div>
 
-                            {/* Excerpt */}
                             <p className="text-sm sm:text-[15px] text-muted-foreground leading-relaxed font-normal line-clamp-3 pl-0 sm:pl-1">
                               {currentNote.excerpt}
                             </p>
                           </div>
 
-                          {/* Card Footer with Clock Meta & Read Action (Matching Image 2) */}
                           <div className="mt-8 pt-5 border-t border-slate-100 flex flex-wrap items-center justify-between gap-4">
                             <div className="flex items-center gap-2 text-xs text-muted-foreground font-medium">
                               <Clock className="h-3.5 w-3.5 text-slate-400" />
@@ -484,7 +536,6 @@ export function LatestUpdatesSection() {
                       className="relative z-10 h-full"
                     >
                       <div className="flex flex-col items-center justify-center text-center h-full min-h-[400px] sm:min-h-[440px] p-8 sm:p-10 rounded-[36px] bg-white border border-slate-200 shadow-[0_12px_40px_-15px_rgba(0,0,0,0.08)]">
-                        {/* College Logo */}
                         <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-slate-50 border border-slate-200/90 p-3 shadow-xs flex items-center justify-center mb-5">
                           <img
                             src="/logo-circle.png"
@@ -520,7 +571,6 @@ export function LatestUpdatesSection() {
                 </div>
               </div>
 
-              {/* Centered Carousel Navigation Controls */}
               {pressNotes.length > 1 && (
                 <div className="mt-6 flex items-center justify-center gap-3">
                   <button
@@ -540,9 +590,8 @@ export function LatestUpdatesSection() {
                         type="button"
                         onClick={() => handleSelectNote(idx)}
                         aria-label={`Go to slide ${idx + 1}`}
-                        className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
-                          activeNoteIndex === idx ? "w-6 bg-blue-600" : "w-2.5 bg-blue-200 hover:bg-blue-300"
-                        }`}
+                        className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${activeNoteIndex === idx ? "w-6 bg-blue-600" : "w-2.5 bg-blue-200 hover:bg-blue-300"
+                          }`}
                       />
                     ))}
                   </div>
@@ -561,7 +610,7 @@ export function LatestUpdatesSection() {
             </RevealOnScroll>
           </div>
 
-          {/* RIGHT SIDE: 55% Width — Vertical Video Carousel (Auto-rotates every 3 seconds) */}
+          {/* RIGHT SIDE: 55% Width — Vertical Video Carousel */}
           <div
             className="w-full lg:w-[55%] flex flex-col justify-between"
             onMouseEnter={() => setIsHoveringVideo(true)}
@@ -590,10 +639,8 @@ export function LatestUpdatesSection() {
 
                 {/* Vertical Card Frame */}
                 <div className="relative min-h-[400px] sm:min-h-[440px] rounded-[36px] bg-slate-950 border border-slate-800 p-5 sm:p-7 text-white shadow-elegant flex flex-col justify-between overflow-hidden group">
-                  {/* Background Ambient Aura */}
                   <div className="absolute -top-12 -right-12 w-56 h-56 bg-primary/20 rounded-full blur-3xl pointer-events-none" />
 
-                  {/* Animated Vertical Video Slide */}
                   {currentVideo ? (
                     <AnimatePresence mode="wait" custom={videoDirection}>
                       <motion.div
@@ -605,7 +652,7 @@ export function LatestUpdatesSection() {
                         transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                         className="flex-1 flex flex-col justify-between"
                       >
-                        {/* Video Thumbnail Frame with Interactive Play Orb */}
+                        {/* Video Thumbnail Frame */}
                         <div
                           role="button"
                           tabIndex={0}
@@ -618,23 +665,18 @@ export function LatestUpdatesSection() {
                           className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden bg-slate-900 border border-white/10 cursor-pointer group/thumb shadow-inner"
                         >
                           <img
-                            src={getYouTubeThumbnail(currentVideo.youtubeId)}
+                            src={getThumbnailUrl(currentVideo.id)}
                             alt={currentVideo.title}
                             loading="lazy"
                             decoding="async"
-                            onError={(e) => {
-                              const fallback = getYouTubeFallbackThumbnail(currentVideo.youtubeId);
-                              if (e.currentTarget.src !== fallback) {
-                                e.currentTarget.src = fallback;
-                              }
-                            }}
+                            onError={() => handleThumbnailError(currentVideo.youtubeId, currentVideo.id)}
                             className="h-full w-full object-cover transition-transform duration-700 group-hover/thumb:scale-105"
                           />
 
                           {/* Dark gradient overlay */}
                           <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent" />
 
-                          {/* Play Button Orb */}
+                          {/* Play Button Orb - always visible */}
                           <div className="absolute inset-0 grid place-items-center">
                             <div className="h-16 w-16 sm:h-20 sm:w-20 rounded-full bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center text-white shadow-2xl transition-all duration-300 group-hover/thumb:scale-110 group-hover/thumb:bg-primary group-hover/thumb:border-primary">
                               <Play className="h-7 w-7 sm:h-8 sm:w-8 fill-current ml-1" />
@@ -648,6 +690,15 @@ export function LatestUpdatesSection() {
                             </span>
                           </div>
 
+                          {/* Show fallback indicator */}
+                          {isUsingFallback(currentVideo.id) && (
+                            <div className="absolute bottom-3.5 left-3.5">
+                              <span className="px-2 py-0.5 rounded-full bg-amber-500/20 backdrop-blur-md border border-amber-500/30 text-[8px] font-medium uppercase tracking-wider text-amber-400">
+                                Low Quality
+                              </span>
+                            </div>
+                          )}
+
                           {isEditMode && currentVideo.isCustom && (
                             <button
                               type="button"
@@ -660,17 +711,23 @@ export function LatestUpdatesSection() {
                           )}
                         </div>
 
-                        {/* Video Title & Meta */}
+                        {/* Video Title */}
                         <div className="mt-4">
                           <h4 className="text-base sm:text-lg md:text-xl font-bold font-display text-white leading-snug line-clamp-2 drop-shadow-sm group-hover:text-primary-glow transition-colors">
                             {currentVideo.title}
                           </h4>
+                          {isUsingFallback(currentVideo.id) && (
+                            <p className="text-[10px] text-amber-400/60 mt-1 flex items-center gap-1.5">
+                              <AlertCircle className="h-3 w-3" />
+                              <span>Using lower quality preview</span>
+                            </p>
+                          )}
                         </div>
                       </motion.div>
                     </AnimatePresence>
                   ) : null}
 
-                  {/* Bottom Bar: Vertical Navigation Controls & Counter */}
+                  {/* Bottom Bar */}
                   <div className="mt-4 pt-4 border-t border-white/10 flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <span className="text-xs font-bold uppercase tracking-wider text-white/60">
@@ -678,14 +735,13 @@ export function LatestUpdatesSection() {
                       </span>
                     </div>
 
-                    {/* Vertical UP / DOWN Step Controls */}
                     <div className="flex items-center gap-1.5">
                       <button
                         type="button"
                         onClick={handlePrevVideo}
                         aria-label="Previous Video"
                         className="h-8 w-8 rounded-full bg-white/10 border border-white/15 hover:bg-white/20 active:scale-95 text-white flex items-center justify-center transition-all cursor-pointer"
-                        title="Previous Video (UP)"
+                        title="Previous Video"
                       >
                         <ChevronUp className="h-4 w-4" />
                       </button>
@@ -694,7 +750,7 @@ export function LatestUpdatesSection() {
                         onClick={handleNextVideo}
                         aria-label="Next Video"
                         className="h-8 w-8 rounded-full bg-white/10 border border-white/15 hover:bg-white/20 active:scale-95 text-white flex items-center justify-center transition-all cursor-pointer"
-                        title="Next Video (DOWN)"
+                        title="Next Video"
                       >
                         <ChevronDown className="h-4 w-4" />
                       </button>

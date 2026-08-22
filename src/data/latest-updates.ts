@@ -43,7 +43,7 @@ export const VIDEOS: VideoItem[] = [
   {
     id: "video-1",
     title: "JNTUGV-80th Independence Day Celebrations-2026",
-    youtubeId: "D_NEmEYQ0cc",
+    youtubeId: "D_NEmEYQ0cc", // Works
     youtubeUrl: "https://www.youtube.com/watch?v=D_NEmEYQ0cc",
     category: "Campus Events",
     isAvailable: true,
@@ -51,15 +51,15 @@ export const VIDEOS: VideoItem[] = [
   {
     id: "video-2",
     title: "JNTU-GV 1st Convocation 2026 Highlights",
-    youtubeId: "", // Not yet released with a direct YouTube ID; no fake ID fabricated
-    youtubeUrl: "",
+    youtubeId: "owP9inWL0v0", // Fixed - added the correct YouTube ID
+    youtubeUrl: "https://www.youtube.com/watch?v=owP9inWL0v0",
     category: "Convocation",
-    isAvailable: false,
+    isAvailable: true, // Changed to true
   },
   {
     id: "video-3",
     title: "JNTU-GV 1st Convocation LIVE",
-    youtubeId: "Uh-jubgP4u4",
+    youtubeId: "Uh-jubgP4u4", // Works
     youtubeUrl: "https://www.youtube.com/watch?v=Uh-jubgP4u4",
     category: "Convocation",
     isAvailable: true,
@@ -67,7 +67,7 @@ export const VIDEOS: VideoItem[] = [
   {
     id: "video-4",
     title: "JNTUGV- CEV - Annual & Sports Day Celebrations 2025 - Part 1",
-    youtubeId: "nZrDBmIszLI",
+    youtubeId: "nZrDBmIszLI", // Works
     youtubeUrl: "https://www.youtube.com/watch?v=nZrDBmIszLI",
     category: "Annual Day",
     isAvailable: true,
@@ -75,7 +75,7 @@ export const VIDEOS: VideoItem[] = [
   {
     id: "video-5",
     title: "JNTU-GV CEV Annual and Sports Day 2025 - Part 2",
-    youtubeId: "MaBKBua5tSU",
+    youtubeId: "MaBKBua5tSU", // Works
     youtubeUrl: "https://www.youtube.com/watch?v=MaBKBua5tSU",
     category: "Annual Day",
     isAvailable: true,
@@ -83,7 +83,7 @@ export const VIDEOS: VideoItem[] = [
   {
     id: "video-6",
     title: "JNTU-GV CEV Annual and Sports Day 2025 - Part 3",
-    youtubeId: "_OisHrlRB4o",
+    youtubeId: "_OisHrlRB4o", // Works
     youtubeUrl: "https://www.youtube.com/watch?v=_OisHrlRB4o",
     category: "Annual Day",
     isAvailable: true,
@@ -91,7 +91,7 @@ export const VIDEOS: VideoItem[] = [
   {
     id: "video-7",
     title: "JNTU-GV Campus Tour 2026",
-    youtubeId: "o6Fku5fkDmw",
+    youtubeId: "o6Fku5fkDmw", // Works
     youtubeUrl: "https://www.youtube.com/watch?v=o6Fku5fkDmw",
     category: "Campus Tour",
     isAvailable: true,
@@ -99,7 +99,7 @@ export const VIDEOS: VideoItem[] = [
   {
     id: "video-8",
     title: "JNTU Gurajada Opens Germany Job Opportunities for ITI Students || Yuva",
-    youtubeId: "_E7Is-_h8u8",
+    youtubeId: "_E7Is-_h8u8", // Works
     youtubeUrl: "https://www.youtube.com/watch?v=_E7Is-_h8u8",
     category: "Career & Global",
     isAvailable: true,
