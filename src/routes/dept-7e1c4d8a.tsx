@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getDepartments } from "@/lib/departments";
 import { Lock, ShieldCheck, ExternalLink, Shield, ChevronDown, Building2, Check } from "lucide-react";
 
-export const Route = createFileRoute("/hod-login")({
+export const Route = createFileRoute("/dept-7e1c4d8a")({
   component: HodLoginPage,
 });
 
@@ -187,11 +187,10 @@ function HodLoginPage() {
                       type="button"
                       disabled={deptsLoading || loading}
                       onClick={() => setIsDropdownOpen((prev) => !prev)}
-                      className={`w-full flex items-center justify-between text-left pl-10 pr-4 py-3 rounded-2xl border text-sm font-semibold transition-all duration-200 outline-none cursor-pointer ${
-                        isDropdownOpen
+                      className={`w-full flex items-center justify-between text-left pl-10 pr-4 py-3 rounded-2xl border text-sm font-semibold transition-all duration-200 outline-none cursor-pointer ${isDropdownOpen
                           ? "border-indigo-500 ring-4 ring-indigo-500/10 bg-white shadow-md"
                           : "border-slate-200 bg-slate-50/60 hover:bg-white hover:border-slate-300 text-slate-800"
-                      }`}
+                        }`}
                     >
                       <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-indigo-600 pointer-events-none">
                         <Building2 className="w-4 h-4" />
@@ -202,9 +201,8 @@ function HodLoginPage() {
                           : sortedDepts.find((d: any) => d.slug === selectedSlug)?.name || "Select your department"}
                       </span>
                       <ChevronDown
-                        className={`w-4 h-4 text-slate-400 transition-transform duration-200 shrink-0 ${
-                          isDropdownOpen ? "rotate-180 text-indigo-600" : ""
-                        }`}
+                        className={`w-4 h-4 text-slate-400 transition-transform duration-200 shrink-0 ${isDropdownOpen ? "rotate-180 text-indigo-600" : ""
+                          }`}
                       />
                     </button>
 
@@ -220,11 +218,10 @@ function HodLoginPage() {
                                 setSelectedSlug(d.slug);
                                 setIsDropdownOpen(false);
                               }}
-                              className={`w-full px-4 py-2.5 text-left text-xs md:text-sm font-semibold flex items-center justify-between transition-colors cursor-pointer ${
-                                isSelected
+                              className={`w-full px-4 py-2.5 text-left text-xs md:text-sm font-semibold flex items-center justify-between transition-colors cursor-pointer ${isSelected
                                   ? "bg-indigo-50 text-indigo-700 font-bold"
                                   : "text-slate-700 hover:bg-slate-50 hover:text-indigo-600"
-                              }`}
+                                }`}
                             >
                               <span className="truncate">{d.name}</span>
                               {isSelected && <Check className="w-4 h-4 text-indigo-600 shrink-0 ml-2" />}

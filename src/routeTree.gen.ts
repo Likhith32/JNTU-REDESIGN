@@ -19,17 +19,17 @@ import { Route as AntiRaggingRouteImport } from './routes/anti-ragging'
 import { Route as BankingRouteImport } from './routes/banking'
 import { Route as CampusLifeRouteImport } from './routes/campus-life'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as Dept7e1c4d8aRouteImport } from './routes/dept-7e1c4d8a'
 import { Route as EdcRouteImport } from './routes/edc'
 import { Route as EngineeringCellRouteImport } from './routes/engineering-cell'
 import { Route as FacultyAccountSettingsRouteImport } from './routes/faculty-account-settings'
-import { Route as FacultyLoginRouteImport } from './routes/faculty-login'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as HodAccountSettingsRouteImport } from './routes/hod-account-settings'
-import { Route as HodLoginRouteImport } from './routes/hod-login'
 import { Route as HostelsRouteImport } from './routes/hostels'
 import { Route as IipcRouteImport } from './routes/iipc'
 import { Route as LatestUpdatesRouteImport } from './routes/latest-updates'
 import { Route as LibraryRouteImport } from './routes/library'
+import { Route as Mgmt9f3a2b1cRouteImport } from './routes/mgmt-9f3a2b1c'
 import { Route as NoticesRouteImport } from './routes/notices'
 import { Route as NssRouteImport } from './routes/nss'
 import { Route as OtherAmenitiesRouteImport } from './routes/other-amenities'
@@ -38,6 +38,7 @@ import { Route as ProfessionalBodiesRouteImport } from './routes/professional-bo
 import { Route as RdCellRouteImport } from './routes/rd-cell'
 import { Route as RtiRouteImport } from './routes/rti'
 import { Route as SportsRouteImport } from './routes/sports'
+import { Route as Staff2b9f6e3dRouteImport } from './routes/staff-2b9f6e3d'
 import { Route as WomenEmpowermentRouteImport } from './routes/women-empowerment'
 import { Route as AboutIndexRouteImport } from './routes/about.index'
 import { Route as AboutAirportConnectivityRouteImport } from './routes/about.airport-connectivity'
@@ -59,7 +60,6 @@ import { Route as AcademicsRegulationsRouteImport } from './routes/academics/reg
 import { Route as AcademicsScholarshipsRouteImport } from './routes/academics/scholarships'
 import { Route as AcademicsSyllabusRouteImport } from './routes/academics/syllabus'
 import { Route as AcademicsTimetablesRouteImport } from './routes/academics/timetables'
-import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminDepartmentsRouteImport } from './routes/admin.departments'
 import { Route as AdminPlacementsRouteImport } from './routes/admin.placements'
 import { Route as AdminUsersRouteImport } from './routes/admin.users'
@@ -183,6 +183,11 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const Dept7e1c4d8aRoute = Dept7e1c4d8aRouteImport.update({
+  id: '/dept-7e1c4d8a',
+  path: '/dept-7e1c4d8a',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EdcRoute = EdcRouteImport.update({
   id: '/edc',
   path: '/edc',
@@ -198,11 +203,6 @@ const FacultyAccountSettingsRoute = FacultyAccountSettingsRouteImport.update({
   path: '/faculty-account-settings',
   getParentRoute: () => rootRouteImport,
 } as any)
-const FacultyLoginRoute = FacultyLoginRouteImport.update({
-  id: '/faculty-login',
-  path: '/faculty-login',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const GalleryRoute = GalleryRouteImport.update({
   id: '/gallery',
   path: '/gallery',
@@ -211,11 +211,6 @@ const GalleryRoute = GalleryRouteImport.update({
 const HodAccountSettingsRoute = HodAccountSettingsRouteImport.update({
   id: '/hod-account-settings',
   path: '/hod-account-settings',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const HodLoginRoute = HodLoginRouteImport.update({
-  id: '/hod-login',
-  path: '/hod-login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HostelsRoute = HostelsRouteImport.update({
@@ -236,6 +231,11 @@ const LatestUpdatesRoute = LatestUpdatesRouteImport.update({
 const LibraryRoute = LibraryRouteImport.update({
   id: '/library',
   path: '/library',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Mgmt9f3a2b1cRoute = Mgmt9f3a2b1cRouteImport.update({
+  id: '/mgmt-9f3a2b1c',
+  path: '/mgmt-9f3a2b1c',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NoticesRoute = NoticesRouteImport.update({
@@ -276,6 +276,11 @@ const RtiRoute = RtiRouteImport.update({
 const SportsRoute = SportsRouteImport.update({
   id: '/sports',
   path: '/sports',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Staff2b9f6e3dRoute = Staff2b9f6e3dRouteImport.update({
+  id: '/staff-2b9f6e3d',
+  path: '/staff-2b9f6e3d',
   getParentRoute: () => rootRouteImport,
 } as any)
 const WomenEmpowermentRoute = WomenEmpowermentRouteImport.update({
@@ -384,11 +389,6 @@ const AcademicsTimetablesRoute = AcademicsTimetablesRouteImport.update({
   id: '/timetables',
   path: '/timetables',
   getParentRoute: () => AcademicsRoute,
-} as any)
-const AdminIndexRoute = AdminIndexRouteImport.update({
-  id: '/admin/',
-  path: '/admin/',
-  getParentRoute: () => rootRouteImport,
 } as any)
 const AdminDepartmentsRoute = AdminDepartmentsRouteImport.update({
   id: '/admin/departments',
@@ -786,17 +786,17 @@ export interface FileRoutesByFullPath {
   '/banking': typeof BankingRoute
   '/campus-life': typeof CampusLifeRouteWithChildren
   '/contact': typeof ContactRoute
+  '/dept-7e1c4d8a': typeof Dept7e1c4d8aRoute
   '/edc': typeof EdcRoute
   '/engineering-cell': typeof EngineeringCellRoute
   '/faculty-account-settings': typeof FacultyAccountSettingsRoute
-  '/faculty-login': typeof FacultyLoginRoute
   '/gallery': typeof GalleryRoute
   '/hod-account-settings': typeof HodAccountSettingsRoute
-  '/hod-login': typeof HodLoginRoute
   '/hostels': typeof HostelsRoute
   '/iipc': typeof IipcRoute
   '/latest-updates': typeof LatestUpdatesRouteWithChildren
   '/library': typeof LibraryRoute
+  '/mgmt-9f3a2b1c': typeof Mgmt9f3a2b1cRoute
   '/notices': typeof NoticesRoute
   '/nss': typeof NssRouteWithChildren
   '/other-amenities': typeof OtherAmenitiesRouteWithChildren
@@ -805,6 +805,7 @@ export interface FileRoutesByFullPath {
   '/rd-cell': typeof RdCellRouteWithChildren
   '/rti': typeof RtiRoute
   '/sports': typeof SportsRoute
+  '/staff-2b9f6e3d': typeof Staff2b9f6e3dRoute
   '/women-empowerment': typeof WomenEmpowermentRouteWithChildren
   '/about/airport-connectivity': typeof AboutAirportConnectivityRoute
   '/about/how-to-reach': typeof AboutHowToReachRoute
@@ -855,7 +856,6 @@ export interface FileRoutesByFullPath {
   '/women-empowerment/recreation': typeof WomenEmpowermentRecreationRoute
   '/about/': typeof AboutIndexRoute
   '/academics/': typeof AcademicsIndexRoute
-  '/admin/': typeof AdminIndexRoute
   '/campus-life/': typeof CampusLifeIndexRoute
   '/departments/': typeof DepartmentsIndexRoute
   '/dispensary/': typeof DispensaryIndexRoute
@@ -908,21 +908,22 @@ export interface FileRoutesByTo {
   '/anti-ragging': typeof AntiRaggingRoute
   '/banking': typeof BankingRoute
   '/contact': typeof ContactRoute
+  '/dept-7e1c4d8a': typeof Dept7e1c4d8aRoute
   '/edc': typeof EdcRoute
   '/engineering-cell': typeof EngineeringCellRoute
   '/faculty-account-settings': typeof FacultyAccountSettingsRoute
-  '/faculty-login': typeof FacultyLoginRoute
   '/gallery': typeof GalleryRoute
   '/hod-account-settings': typeof HodAccountSettingsRoute
-  '/hod-login': typeof HodLoginRoute
   '/hostels': typeof HostelsRoute
   '/iipc': typeof IipcRoute
   '/library': typeof LibraryRoute
+  '/mgmt-9f3a2b1c': typeof Mgmt9f3a2b1cRoute
   '/notices': typeof NoticesRoute
   '/other-amenities': typeof OtherAmenitiesRouteWithChildren
   '/professional-bodies': typeof ProfessionalBodiesRoute
   '/rti': typeof RtiRoute
   '/sports': typeof SportsRoute
+  '/staff-2b9f6e3d': typeof Staff2b9f6e3dRoute
   '/about/airport-connectivity': typeof AboutAirportConnectivityRoute
   '/about/how-to-reach': typeof AboutHowToReachRoute
   '/about/institution': typeof AboutInstitutionRoute
@@ -970,7 +971,6 @@ export interface FileRoutesByTo {
   '/women-empowerment/recreation': typeof WomenEmpowermentRecreationRoute
   '/about': typeof AboutIndexRoute
   '/academics': typeof AcademicsIndexRoute
-  '/admin': typeof AdminIndexRoute
   '/campus-life': typeof CampusLifeIndexRoute
   '/departments': typeof DepartmentsIndexRoute
   '/dispensary': typeof DispensaryIndexRoute
@@ -1027,17 +1027,17 @@ export interface FileRoutesById {
   '/banking': typeof BankingRoute
   '/campus-life': typeof CampusLifeRouteWithChildren
   '/contact': typeof ContactRoute
+  '/dept-7e1c4d8a': typeof Dept7e1c4d8aRoute
   '/edc': typeof EdcRoute
   '/engineering-cell': typeof EngineeringCellRoute
   '/faculty-account-settings': typeof FacultyAccountSettingsRoute
-  '/faculty-login': typeof FacultyLoginRoute
   '/gallery': typeof GalleryRoute
   '/hod-account-settings': typeof HodAccountSettingsRoute
-  '/hod-login': typeof HodLoginRoute
   '/hostels': typeof HostelsRoute
   '/iipc': typeof IipcRoute
   '/latest-updates': typeof LatestUpdatesRouteWithChildren
   '/library': typeof LibraryRoute
+  '/mgmt-9f3a2b1c': typeof Mgmt9f3a2b1cRoute
   '/notices': typeof NoticesRoute
   '/nss': typeof NssRouteWithChildren
   '/other-amenities': typeof OtherAmenitiesRouteWithChildren
@@ -1046,6 +1046,7 @@ export interface FileRoutesById {
   '/rd-cell': typeof RdCellRouteWithChildren
   '/rti': typeof RtiRoute
   '/sports': typeof SportsRoute
+  '/staff-2b9f6e3d': typeof Staff2b9f6e3dRoute
   '/women-empowerment': typeof WomenEmpowermentRouteWithChildren
   '/about/airport-connectivity': typeof AboutAirportConnectivityRoute
   '/about/how-to-reach': typeof AboutHowToReachRoute
@@ -1096,7 +1097,6 @@ export interface FileRoutesById {
   '/women-empowerment/recreation': typeof WomenEmpowermentRecreationRoute
   '/about/': typeof AboutIndexRoute
   '/academics/': typeof AcademicsIndexRoute
-  '/admin/': typeof AdminIndexRoute
   '/campus-life/': typeof CampusLifeIndexRoute
   '/departments/': typeof DepartmentsIndexRoute
   '/dispensary/': typeof DispensaryIndexRoute
@@ -1154,17 +1154,17 @@ export interface FileRouteTypes {
     | '/banking'
     | '/campus-life'
     | '/contact'
+    | '/dept-7e1c4d8a'
     | '/edc'
     | '/engineering-cell'
     | '/faculty-account-settings'
-    | '/faculty-login'
     | '/gallery'
     | '/hod-account-settings'
-    | '/hod-login'
     | '/hostels'
     | '/iipc'
     | '/latest-updates'
     | '/library'
+    | '/mgmt-9f3a2b1c'
     | '/notices'
     | '/nss'
     | '/other-amenities'
@@ -1173,6 +1173,7 @@ export interface FileRouteTypes {
     | '/rd-cell'
     | '/rti'
     | '/sports'
+    | '/staff-2b9f6e3d'
     | '/women-empowerment'
     | '/about/airport-connectivity'
     | '/about/how-to-reach'
@@ -1223,7 +1224,6 @@ export interface FileRouteTypes {
     | '/women-empowerment/recreation'
     | '/about/'
     | '/academics/'
-    | '/admin/'
     | '/campus-life/'
     | '/departments/'
     | '/dispensary/'
@@ -1276,21 +1276,22 @@ export interface FileRouteTypes {
     | '/anti-ragging'
     | '/banking'
     | '/contact'
+    | '/dept-7e1c4d8a'
     | '/edc'
     | '/engineering-cell'
     | '/faculty-account-settings'
-    | '/faculty-login'
     | '/gallery'
     | '/hod-account-settings'
-    | '/hod-login'
     | '/hostels'
     | '/iipc'
     | '/library'
+    | '/mgmt-9f3a2b1c'
     | '/notices'
     | '/other-amenities'
     | '/professional-bodies'
     | '/rti'
     | '/sports'
+    | '/staff-2b9f6e3d'
     | '/about/airport-connectivity'
     | '/about/how-to-reach'
     | '/about/institution'
@@ -1338,7 +1339,6 @@ export interface FileRouteTypes {
     | '/women-empowerment/recreation'
     | '/about'
     | '/academics'
-    | '/admin'
     | '/campus-life'
     | '/departments'
     | '/dispensary'
@@ -1394,17 +1394,17 @@ export interface FileRouteTypes {
     | '/banking'
     | '/campus-life'
     | '/contact'
+    | '/dept-7e1c4d8a'
     | '/edc'
     | '/engineering-cell'
     | '/faculty-account-settings'
-    | '/faculty-login'
     | '/gallery'
     | '/hod-account-settings'
-    | '/hod-login'
     | '/hostels'
     | '/iipc'
     | '/latest-updates'
     | '/library'
+    | '/mgmt-9f3a2b1c'
     | '/notices'
     | '/nss'
     | '/other-amenities'
@@ -1413,6 +1413,7 @@ export interface FileRouteTypes {
     | '/rd-cell'
     | '/rti'
     | '/sports'
+    | '/staff-2b9f6e3d'
     | '/women-empowerment'
     | '/about/airport-connectivity'
     | '/about/how-to-reach'
@@ -1463,7 +1464,6 @@ export interface FileRouteTypes {
     | '/women-empowerment/recreation'
     | '/about/'
     | '/academics/'
-    | '/admin/'
     | '/campus-life/'
     | '/departments/'
     | '/dispensary/'
@@ -1520,17 +1520,17 @@ export interface RootRouteChildren {
   BankingRoute: typeof BankingRoute
   CampusLifeRoute: typeof CampusLifeRouteWithChildren
   ContactRoute: typeof ContactRoute
+  Dept7e1c4d8aRoute: typeof Dept7e1c4d8aRoute
   EdcRoute: typeof EdcRoute
   EngineeringCellRoute: typeof EngineeringCellRoute
   FacultyAccountSettingsRoute: typeof FacultyAccountSettingsRoute
-  FacultyLoginRoute: typeof FacultyLoginRoute
   GalleryRoute: typeof GalleryRoute
   HodAccountSettingsRoute: typeof HodAccountSettingsRoute
-  HodLoginRoute: typeof HodLoginRoute
   HostelsRoute: typeof HostelsRoute
   IipcRoute: typeof IipcRoute
   LatestUpdatesRoute: typeof LatestUpdatesRouteWithChildren
   LibraryRoute: typeof LibraryRoute
+  Mgmt9f3a2b1cRoute: typeof Mgmt9f3a2b1cRoute
   NoticesRoute: typeof NoticesRoute
   NssRoute: typeof NssRouteWithChildren
   OtherAmenitiesRoute: typeof OtherAmenitiesRouteWithChildren
@@ -1539,6 +1539,7 @@ export interface RootRouteChildren {
   RdCellRoute: typeof RdCellRouteWithChildren
   RtiRoute: typeof RtiRoute
   SportsRoute: typeof SportsRoute
+  Staff2b9f6e3dRoute: typeof Staff2b9f6e3dRoute
   WomenEmpowermentRoute: typeof WomenEmpowermentRouteWithChildren
   AdminDepartmentsRoute: typeof AdminDepartmentsRoute
   AdminPlacementsRoute: typeof AdminPlacementsRoute
@@ -1546,7 +1547,6 @@ export interface RootRouteChildren {
   ApiPostsRoute: typeof ApiPostsRoute
   ApiUploadRoute: typeof ApiUploadRoute
   DepartmentsIdRoute: typeof DepartmentsIdRouteWithChildren
-  AdminIndexRoute: typeof AdminIndexRoute
   DepartmentsIndexRoute: typeof DepartmentsIndexRoute
   DispensaryIndexRoute: typeof DispensaryIndexRoute
   ApiPushKeyRoute: typeof ApiPushKeyRoute
@@ -1642,6 +1642,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dept-7e1c4d8a': {
+      id: '/dept-7e1c4d8a'
+      path: '/dept-7e1c4d8a'
+      fullPath: '/dept-7e1c4d8a'
+      preLoaderRoute: typeof Dept7e1c4d8aRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/edc': {
       id: '/edc'
       path: '/edc'
@@ -1663,13 +1670,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FacultyAccountSettingsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/faculty-login': {
-      id: '/faculty-login'
-      path: '/faculty-login'
-      fullPath: '/faculty-login'
-      preLoaderRoute: typeof FacultyLoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/gallery': {
       id: '/gallery'
       path: '/gallery'
@@ -1682,13 +1682,6 @@ declare module '@tanstack/react-router' {
       path: '/hod-account-settings'
       fullPath: '/hod-account-settings'
       preLoaderRoute: typeof HodAccountSettingsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/hod-login': {
-      id: '/hod-login'
-      path: '/hod-login'
-      fullPath: '/hod-login'
-      preLoaderRoute: typeof HodLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/hostels': {
@@ -1717,6 +1710,13 @@ declare module '@tanstack/react-router' {
       path: '/library'
       fullPath: '/library'
       preLoaderRoute: typeof LibraryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mgmt-9f3a2b1c': {
+      id: '/mgmt-9f3a2b1c'
+      path: '/mgmt-9f3a2b1c'
+      fullPath: '/mgmt-9f3a2b1c'
+      preLoaderRoute: typeof Mgmt9f3a2b1cRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/notices': {
@@ -1773,6 +1773,13 @@ declare module '@tanstack/react-router' {
       path: '/sports'
       fullPath: '/sports'
       preLoaderRoute: typeof SportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/staff-2b9f6e3d': {
+      id: '/staff-2b9f6e3d'
+      path: '/staff-2b9f6e3d'
+      fullPath: '/staff-2b9f6e3d'
+      preLoaderRoute: typeof Staff2b9f6e3dRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/women-empowerment': {
@@ -1921,13 +1928,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/academics/timetables'
       preLoaderRoute: typeof AcademicsTimetablesRouteImport
       parentRoute: typeof AcademicsRoute
-    }
-    '/admin/': {
-      id: '/admin/'
-      path: '/admin'
-      fullPath: '/admin/'
-      preLoaderRoute: typeof AdminIndexRouteImport
-      parentRoute: typeof rootRouteImport
     }
     '/admin/departments': {
       id: '/admin/departments'
@@ -2690,17 +2690,17 @@ const rootRouteChildren: RootRouteChildren = {
   BankingRoute: BankingRoute,
   CampusLifeRoute: CampusLifeRouteWithChildren,
   ContactRoute: ContactRoute,
+  Dept7e1c4d8aRoute: Dept7e1c4d8aRoute,
   EdcRoute: EdcRoute,
   EngineeringCellRoute: EngineeringCellRoute,
   FacultyAccountSettingsRoute: FacultyAccountSettingsRoute,
-  FacultyLoginRoute: FacultyLoginRoute,
   GalleryRoute: GalleryRoute,
   HodAccountSettingsRoute: HodAccountSettingsRoute,
-  HodLoginRoute: HodLoginRoute,
   HostelsRoute: HostelsRoute,
   IipcRoute: IipcRoute,
   LatestUpdatesRoute: LatestUpdatesRouteWithChildren,
   LibraryRoute: LibraryRoute,
+  Mgmt9f3a2b1cRoute: Mgmt9f3a2b1cRoute,
   NoticesRoute: NoticesRoute,
   NssRoute: NssRouteWithChildren,
   OtherAmenitiesRoute: OtherAmenitiesRouteWithChildren,
@@ -2709,6 +2709,7 @@ const rootRouteChildren: RootRouteChildren = {
   RdCellRoute: RdCellRouteWithChildren,
   RtiRoute: RtiRoute,
   SportsRoute: SportsRoute,
+  Staff2b9f6e3dRoute: Staff2b9f6e3dRoute,
   WomenEmpowermentRoute: WomenEmpowermentRouteWithChildren,
   AdminDepartmentsRoute: AdminDepartmentsRoute,
   AdminPlacementsRoute: AdminPlacementsRoute,
@@ -2716,7 +2717,6 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPostsRoute: ApiPostsRoute,
   ApiUploadRoute: ApiUploadRoute,
   DepartmentsIdRoute: DepartmentsIdRouteWithChildren,
-  AdminIndexRoute: AdminIndexRoute,
   DepartmentsIndexRoute: DepartmentsIndexRoute,
   DispensaryIndexRoute: DispensaryIndexRoute,
   ApiPushKeyRoute: ApiPushKeyRoute,

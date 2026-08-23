@@ -7,8 +7,8 @@ import { updateFacultyProfile } from "@/lib/departments";
 import { setFacultyCredentials } from "@/lib/facultyAuth";
 import { toast } from "sonner";
 import { useFaculty } from "@/context/FacultyContext";
-import { 
-  ArrowLeft, GraduationCap, Trophy, Globe, 
+import {
+  ArrowLeft, GraduationCap, Trophy, Globe,
   Briefcase, BookOpen, Save, Plus, Trash2, Camera, Type, IdCard, LogOut, RotateCcw, KeyRound, Mail,
   FileText, ExternalLink, Paperclip, Upload, Download, FolderKanban, File, CheckCircle2, Settings
 } from "lucide-react";
@@ -208,7 +208,7 @@ function FacultyDetailProfilePage() {
 
   const isEditMode = isDeptLevelEdit || isFacultySelfEdit;
   const [activeTab, setActiveTab] = useState<string>("profile");
-  
+
   // Local reactive edit state mapping
   const [editState, setEditState] = useState<any>(null);
 
@@ -357,7 +357,7 @@ function FacultyDetailProfilePage() {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white/90 backdrop-blur-md p-3 md:px-5 md:py-3 rounded-2xl border border-slate-200/80 shadow-xs">
         {/* Left: Back Button & Session Status */}
         <div className="flex flex-wrap items-center gap-3">
-          <Link 
+          <Link
             to="/departments/$id/faculty"
             params={{ id: deptId }}
             className="inline-flex items-center gap-2 text-xs font-bold text-slate-700 hover:text-indigo-600 bg-slate-100 hover:bg-slate-200/80 px-3.5 py-2 rounded-xl border border-slate-200 transition-all cursor-pointer"
@@ -390,7 +390,7 @@ function FacultyDetailProfilePage() {
                 type="button"
                 onClick={async () => {
                   await logout();
-                  navigate({ to: "/faculty-login" });
+                  navigate({ to: "/staff-2b9f6e3d" });
                 }}
                 className="inline-flex items-center gap-1.5 bg-rose-50 hover:bg-rose-100 border border-rose-200 text-rose-700 px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer"
                 title="Sign out of faculty profile"
@@ -412,7 +412,7 @@ function FacultyDetailProfilePage() {
                 <RotateCcw size={14} />
                 <span className="hidden sm:inline">Undo</span>
               </button>
-              <button 
+              <button
                 onClick={() => mutation.mutate(editState)}
                 disabled={mutation.isPending}
                 className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 disabled:opacity-60 text-white px-5 py-2 rounded-xl font-bold text-xs shadow-md shadow-indigo-100 transition-all cursor-pointer disabled:cursor-not-allowed"
@@ -454,8 +454,8 @@ function FacultyDetailProfilePage() {
           </div>
         ) : (
           <div className="h-32 w-32 md:h-40 md:w-40 rounded-full overflow-hidden border-4 border-white/10 shrink-0 bg-white/5 relative group">
-            <SafeImage 
-              src={editState.photo_url} 
+            <SafeImage
+              src={editState.photo_url}
               alt={editState.name}
               decoding="async"
               loading="lazy"
@@ -477,11 +477,11 @@ function FacultyDetailProfilePage() {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left bg-white/5 p-6 rounded-2xl border border-white/10">
               <div className="space-y-1">
-                <label className="text-[10px] text-amber-400 font-bold uppercase tracking-wider flex items-center gap-1"><Type size={12}/> Faculty Name</label>
+                <label className="text-[10px] text-amber-400 font-bold uppercase tracking-wider flex items-center gap-1"><Type size={12} /> Faculty Name</label>
                 <input className="w-full bg-slate-800 border border-slate-700 p-2.5 rounded-xl text-sm outline-none font-bold text-white focus:ring-2 focus:ring-amber-400/40" value={editState.name} onChange={(e) => setEditState({ ...editState, name: e.target.value })} />
               </div>
               <div className="space-y-1">
-                <label className="text-[10px] text-amber-400 font-bold uppercase tracking-wider flex items-center gap-1"><IdCard size={12}/> Designation</label>
+                <label className="text-[10px] text-amber-400 font-bold uppercase tracking-wider flex items-center gap-1"><IdCard size={12} /> Designation</label>
                 <input className="w-full bg-slate-800 border border-slate-700 p-2.5 rounded-xl text-sm outline-none text-white focus:ring-2 focus:ring-amber-400/40" value={editState.designation} onChange={(e) => setEditState({ ...editState, designation: e.target.value })} />
               </div>
             </div>
@@ -502,9 +502,8 @@ function FacultyDetailProfilePage() {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs md:text-sm tracking-tight transition-all cursor-pointer ${
-                isActive ? 'bg-slate-900 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100'
-              }`}
+              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs md:text-sm tracking-tight transition-all cursor-pointer ${isActive ? 'bg-slate-900 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100'
+                }`}
             >
               <Icon size={16} />
               {tab.label}
@@ -515,7 +514,7 @@ function FacultyDetailProfilePage() {
 
       {/* Core Dynamic Content Body Panel */}
       <div className={`bg-white border rounded-[2rem] p-6 md:p-8 shadow-sm transition-all ${isEditMode ? 'border-amber-300 bg-amber-50/10' : 'border-slate-100'}`}>
-        
+
         {/* --- Tab 1: Profile --- */}
         {activeTab === "profile" && (
           <div className="space-y-6">
@@ -526,10 +525,10 @@ function FacultyDetailProfilePage() {
                 <div className="space-y-2.5">
                   {editState.qualifications.map((item: SectionItem, idx: number) => (
                     <div key={idx} className="flex gap-2 items-center">
-                      <input 
+                      <input
                         disabled={!isEditMode}
                         className="bg-slate-100 text-slate-800 text-xs font-bold px-3 py-2 rounded-lg w-full outline-none disabled:opacity-100 border border-transparent focus:border-slate-300"
-                        value={item.title} 
+                        value={item.title}
                         onChange={(e) => handleItemTitleChange("qualifications", idx, e.target.value)}
                       />
                       <ItemDocUploader
@@ -541,12 +540,12 @@ function FacultyDetailProfilePage() {
                         facultyName={editState.name}
                       />
                       {isEditMode && (
-                        <button onClick={() => removeArrayElement("qualifications", idx)} className="text-red-500 hover:bg-red-50 p-1.5 rounded-lg shrink-0"><Trash2 size={14}/></button>
+                        <button onClick={() => removeArrayElement("qualifications", idx)} className="text-red-500 hover:bg-red-50 p-1.5 rounded-lg shrink-0"><Trash2 size={14} /></button>
                       )}
                     </div>
                   ))}
                   {isEditMode && (
-                    <button onClick={() => addArrayElement("qualifications", "M.Tech")} className="flex items-center gap-1 text-[11px] text-indigo-600 font-bold border border-dashed border-indigo-200 px-3 py-1.5 rounded-lg hover:bg-indigo-50/50 cursor-pointer"><Plus size={12}/> Add Degree</button>
+                    <button onClick={() => addArrayElement("qualifications", "M.Tech")} className="flex items-center gap-1 text-[11px] text-indigo-600 font-bold border border-dashed border-indigo-200 px-3 py-1.5 rounded-lg hover:bg-indigo-50/50 cursor-pointer"><Plus size={12} /> Add Degree</button>
                   )}
                 </div>
               </div>
@@ -554,20 +553,20 @@ function FacultyDetailProfilePage() {
               <div className="space-y-4">
                 <div>
                   <span className="text-xs text-slate-400 uppercase font-bold tracking-wider block mb-1">Area of Specialization</span>
-                  <input 
-                    disabled={!isEditMode} 
-                    className="text-slate-800 border bg-transparent border-slate-200 disabled:border-transparent p-2 rounded-xl text-sm font-semibold w-full outline-none focus:bg-white" 
-                    value={editState.specialization} 
+                  <input
+                    disabled={!isEditMode}
+                    className="text-slate-800 border bg-transparent border-slate-200 disabled:border-transparent p-2 rounded-xl text-sm font-semibold w-full outline-none focus:bg-white"
+                    value={editState.specialization}
                     onChange={(e) => setEditState({ ...editState, specialization: e.target.value })}
                   />
                 </div>
                 <div>
                   <span className="text-xs text-slate-400 uppercase font-bold tracking-wider block mb-1">Experience (Years)</span>
-                  <input 
+                  <input
                     type="number"
-                    disabled={!isEditMode} 
-                    className="text-slate-800 border bg-transparent border-slate-200 disabled:border-transparent p-2 rounded-xl text-sm font-semibold w-full outline-none focus:bg-white" 
-                    value={editState.experience_years} 
+                    disabled={!isEditMode}
+                    className="text-slate-800 border bg-transparent border-slate-200 disabled:border-transparent p-2 rounded-xl text-sm font-semibold w-full outline-none focus:bg-white"
+                    value={editState.experience_years}
                     onChange={(e) => setEditState({ ...editState, experience_years: e.target.value })}
                   />
                 </div>
@@ -588,7 +587,7 @@ function FacultyDetailProfilePage() {
                   {editState.awards.map((item: SectionItem, idx: number) => (
                     <div key={idx} className="flex gap-2 items-center">
                       <span className="w-2 h-2 rounded-full bg-blue-500 shrink-0" />
-                      <input 
+                      <input
                         disabled={!isEditMode}
                         className="w-full text-sm text-slate-700 bg-transparent outline-none border-b border-transparent focus:border-slate-200 disabled:opacity-100 py-1"
                         value={item.title}
@@ -603,12 +602,12 @@ function FacultyDetailProfilePage() {
                         facultyName={editState.name}
                       />
                       {isEditMode && (
-                        <button onClick={() => removeArrayElement("awards", idx)} className="text-red-500 shrink-0"><Trash2 size={14}/></button>
+                        <button onClick={() => removeArrayElement("awards", idx)} className="text-red-500 shrink-0"><Trash2 size={14} /></button>
                       )}
                     </div>
                   ))}
                   {isEditMode && (
-                    <button onClick={() => addArrayElement("awards", "National/Institutional Research Honor")} className="flex items-center gap-1 text-[11px] text-blue-700 font-bold pt-1 cursor-pointer"><Plus size={12}/> Add Award Item</button>
+                    <button onClick={() => addArrayElement("awards", "National/Institutional Research Honor")} className="flex items-center gap-1 text-[11px] text-blue-700 font-bold pt-1 cursor-pointer"><Plus size={12} /> Add Award Item</button>
                   )}
                 </div>
               </div>
@@ -620,7 +619,7 @@ function FacultyDetailProfilePage() {
                   {editState.fellowships.map((item: SectionItem, idx: number) => (
                     <div key={idx} className="flex gap-2 items-center">
                       <span className="w-2 h-2 rounded-full bg-indigo-400 shrink-0" />
-                      <input 
+                      <input
                         disabled={!isEditMode}
                         className="w-full text-sm text-slate-700 bg-transparent outline-none border-b border-transparent focus:border-slate-200 disabled:opacity-100 py-1"
                         value={item.title}
@@ -635,12 +634,12 @@ function FacultyDetailProfilePage() {
                         facultyName={editState.name}
                       />
                       {isEditMode && (
-                        <button onClick={() => removeArrayElement("fellowships", idx)} className="text-red-500 shrink-0"><Trash2 size={14}/></button>
+                        <button onClick={() => removeArrayElement("fellowships", idx)} className="text-red-500 shrink-0"><Trash2 size={14} /></button>
                       )}
                     </div>
                   ))}
                   {isEditMode && (
-                    <button onClick={() => addArrayElement("fellowships", "Honorary Research Fellow Group")} className="flex items-center gap-1 text-[11px] text-indigo-700 font-bold pt-1 cursor-pointer"><Plus size={12}/> Add Fellowship Item</button>
+                    <button onClick={() => addArrayElement("fellowships", "Honorary Research Fellow Group")} className="flex items-center gap-1 text-[11px] text-indigo-700 font-bold pt-1 cursor-pointer"><Plus size={12} /> Add Fellowship Item</button>
                   )}
                 </div>
               </div>
@@ -651,7 +650,7 @@ function FacultyDetailProfilePage() {
                 <div className="space-y-2.5">
                   {editState.professional_memberships.map((item: SectionItem, idx: number) => (
                     <div key={idx} className="flex items-center gap-2 bg-blue-50/50 border border-blue-100 p-2 rounded-xl">
-                      <input 
+                      <input
                         disabled={!isEditMode}
                         className="bg-transparent outline-none w-full text-xs font-bold text-blue-900"
                         value={item.title}
@@ -666,12 +665,12 @@ function FacultyDetailProfilePage() {
                         facultyName={editState.name}
                       />
                       {isEditMode && (
-                        <button onClick={() => removeArrayElement("professional_memberships", idx)} className="text-red-500 hover:bg-white rounded-md p-1 shrink-0"><Trash2 size={12}/></button>
+                        <button onClick={() => removeArrayElement("professional_memberships", idx)} className="text-red-500 hover:bg-white rounded-md p-1 shrink-0"><Trash2 size={12} /></button>
                       )}
                     </div>
                   ))}
                   {isEditMode && (
-                    <button onClick={() => addArrayElement("professional_memberships", "IEEE Member")} className="bg-white border border-dashed border-slate-300 text-slate-500 text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1 cursor-pointer"><Plus size={12}/> Add Membership</button>
+                    <button onClick={() => addArrayElement("professional_memberships", "IEEE Member")} className="bg-white border border-dashed border-slate-300 text-slate-500 text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1 cursor-pointer"><Plus size={12} /> Add Membership</button>
                   )}
                 </div>
               </div>
@@ -690,7 +689,7 @@ function FacultyDetailProfilePage() {
                   <div className="space-y-2.5">
                     {editState.international_exchanges.map((item: SectionItem, idx: number) => (
                       <div key={idx} className="flex gap-2 items-center">
-                        <input 
+                        <input
                           disabled={!isEditMode}
                           className="w-full text-sm text-slate-600 bg-white border border-slate-200 disabled:border-transparent disabled:bg-transparent rounded-lg p-1.5 outline-none font-medium"
                           value={item.title}
@@ -705,14 +704,14 @@ function FacultyDetailProfilePage() {
                           facultyName={editState.name}
                         />
                         {isEditMode && (
-                          <button onClick={() => removeArrayElement("international_exchanges", idx)} className="text-red-500 shrink-0"><Trash2 size={14}/></button>
+                          <button onClick={() => removeArrayElement("international_exchanges", idx)} className="text-red-500 shrink-0"><Trash2 size={14} /></button>
                         )}
                       </div>
                     ))}
                   </div>
                 </div>
                 {isEditMode && (
-                  <button onClick={() => addArrayElement("international_exchanges", "Exchanged Faculty Delegate")} className="flex items-center gap-1 text-xs text-indigo-600 font-bold mt-4 cursor-pointer"><Plus size={12}/> Add Record</button>
+                  <button onClick={() => addArrayElement("international_exchanges", "Exchanged Faculty Delegate")} className="flex items-center gap-1 text-xs text-indigo-600 font-bold mt-4 cursor-pointer"><Plus size={12} /> Add Record</button>
                 )}
               </div>
 
@@ -722,7 +721,7 @@ function FacultyDetailProfilePage() {
                   <div className="space-y-2.5">
                     {editState.sabbaticals.map((item: SectionItem, idx: number) => (
                       <div key={idx} className="flex gap-2 items-center">
-                        <input 
+                        <input
                           disabled={!isEditMode}
                           className="w-full text-sm text-slate-600 bg-white border border-slate-200 disabled:border-transparent disabled:bg-transparent rounded-lg p-1.5 outline-none font-medium"
                           value={item.title}
@@ -737,14 +736,14 @@ function FacultyDetailProfilePage() {
                           facultyName={editState.name}
                         />
                         {isEditMode && (
-                          <button onClick={() => removeArrayElement("sabbaticals", idx)} className="text-red-500 shrink-0"><Trash2 size={14}/></button>
+                          <button onClick={() => removeArrayElement("sabbaticals", idx)} className="text-red-500 shrink-0"><Trash2 size={14} /></button>
                         )}
                       </div>
                     ))}
                   </div>
                 </div>
                 {isEditMode && (
-                  <button onClick={() => addArrayElement("sabbaticals", "Research Leave Assignment")} className="flex items-center gap-1 text-xs text-indigo-600 font-bold mt-4 cursor-pointer"><Plus size={12}/> Add Sabbatical Leave</button>
+                  <button onClick={() => addArrayElement("sabbaticals", "Research Leave Assignment")} className="flex items-center gap-1 text-xs text-indigo-600 font-bold mt-4 cursor-pointer"><Plus size={12} /> Add Sabbatical Leave</button>
                 )}
               </div>
             </div>
@@ -757,7 +756,7 @@ function FacultyDetailProfilePage() {
             <div className="flex justify-between items-center border-b pb-2 border-slate-100">
               <h3 className="text-xl font-bold text-slate-900">4. Consultancy Assignments</h3>
               {isEditMode && (
-                <button onClick={addConsultancyProject} className="flex items-center gap-1 text-xs bg-slate-900 text-white px-3 py-1.5 rounded-xl font-bold cursor-pointer"><Plus size={12}/> Add Row</button>
+                <button onClick={addConsultancyProject} className="flex items-center gap-1 text-xs bg-slate-900 text-white px-3 py-1.5 rounded-xl font-bold cursor-pointer"><Plus size={12} /> Add Row</button>
               )}
             </div>
             <div className="overflow-hidden border border-slate-100 rounded-xl">
@@ -775,24 +774,24 @@ function FacultyDetailProfilePage() {
                   {editState.consultancy_projects.map((proj: ConsultancyProject, idx: number) => (
                     <tr key={idx} className="hover:bg-slate-50/50">
                       <td className="p-4">
-                        <input 
-                          disabled={!isEditMode} 
-                          className="bg-transparent font-semibold text-slate-900 outline-none w-full border-b border-transparent focus:border-slate-200" 
+                        <input
+                          disabled={!isEditMode}
+                          className="bg-transparent font-semibold text-slate-900 outline-none w-full border-b border-transparent focus:border-slate-200"
                           value={proj.title}
                           onChange={(e) => handleConsultancyChange(idx, "title", e.target.value)}
                         />
                       </td>
                       <td className="p-4">
-                        <input 
-                          disabled={!isEditMode} 
-                          className="bg-transparent outline-none w-full border-b border-transparent focus:border-slate-200" 
+                        <input
+                          disabled={!isEditMode}
+                          className="bg-transparent outline-none w-full border-b border-transparent focus:border-slate-200"
                           value={proj.client}
                           onChange={(e) => handleConsultancyChange(idx, "client", e.target.value)}
                         />
                       </td>
                       <td className="p-4">
                         {isEditMode ? (
-                          <select 
+                          <select
                             className="bg-slate-50 border border-slate-200 rounded p-1 text-xs font-bold outline-none"
                             value={proj.status}
                             onChange={(e) => handleConsultancyChange(idx, "status", e.target.value)}
@@ -801,9 +800,8 @@ function FacultyDetailProfilePage() {
                             <option value="Completed">Completed</option>
                           </select>
                         ) : (
-                          <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
-                            proj.status === "Completed" ? 'bg-emerald-50 text-emerald-700' : 'bg-amber-50 text-amber-700'
-                          }`}>{proj.status}</span>
+                          <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${proj.status === "Completed" ? 'bg-emerald-50 text-emerald-700' : 'bg-amber-50 text-amber-700'
+                            }`}>{proj.status}</span>
                         )}
                       </td>
                       <td className="p-4">
@@ -821,7 +819,7 @@ function FacultyDetailProfilePage() {
                           <button onClick={() => {
                             const updated = editState.consultancy_projects.filter((_: any, i: number) => i !== idx);
                             setEditState({ ...editState, consultancy_projects: updated });
-                          }} className="text-red-500 hover:bg-red-50 p-1 rounded-lg"><Trash2 size={14}/></button>
+                          }} className="text-red-500 hover:bg-red-50 p-1 rounded-lg"><Trash2 size={14} /></button>
                         </td>
                       )}
                     </tr>
@@ -842,7 +840,7 @@ function FacultyDetailProfilePage() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {editState.fdps_attended.map((item: SectionItem, i: number) => (
                     <div key={i} className="p-3 bg-slate-50 border border-slate-100 rounded-xl text-xs font-medium text-slate-700 flex items-center justify-between gap-2">
-                      <input 
+                      <input
                         disabled={!isEditMode}
                         className="bg-transparent outline-none w-full font-semibold"
                         value={item.title}
@@ -857,13 +855,13 @@ function FacultyDetailProfilePage() {
                         facultyName={editState.name}
                       />
                       {isEditMode && (
-                        <button onClick={() => removeArrayElement("fdps_attended", i)} className="text-red-500 shrink-0"><Trash2 size={12}/></button>
+                        <button onClick={() => removeArrayElement("fdps_attended", i)} className="text-red-500 shrink-0"><Trash2 size={12} /></button>
                       )}
                     </div>
                   ))}
                 </div>
                 {isEditMode && (
-                  <button onClick={() => addArrayElement("fdps_attended", "Advanced Research Workshop Focus")} className="flex items-center gap-1 text-[11px] text-slate-700 font-bold mt-2 cursor-pointer"><Plus size={12}/> Add FDP/Workshop Program</button>
+                  <button onClick={() => addArrayElement("fdps_attended", "Advanced Research Workshop Focus")} className="flex items-center gap-1 text-[11px] text-slate-700 font-bold mt-2 cursor-pointer"><Plus size={12} /> Add FDP/Workshop Program</button>
                 )}
               </div>
 
@@ -873,7 +871,7 @@ function FacultyDetailProfilePage() {
                   {editState.conferences_attended.map((item: SectionItem, i: number) => (
                     <div key={i} className="flex gap-2 items-center">
                       <span className="w-1.5 h-1.5 rounded-full bg-slate-400 shrink-0" />
-                      <input 
+                      <input
                         disabled={!isEditMode}
                         className="w-full text-sm text-slate-600 bg-transparent outline-none border-b border-transparent focus:border-slate-200 py-0.5 font-medium"
                         value={item.title}
@@ -888,12 +886,12 @@ function FacultyDetailProfilePage() {
                         facultyName={editState.name}
                       />
                       {isEditMode && (
-                        <button onClick={() => removeArrayElement("conferences_attended", i)} className="text-red-500 shrink-0"><Trash2 size={14}/></button>
+                        <button onClick={() => removeArrayElement("conferences_attended", i)} className="text-red-500 shrink-0"><Trash2 size={14} /></button>
                       )}
                     </div>
                   ))}
                   {isEditMode && (
-                    <button onClick={() => addArrayElement("conferences_attended", "IEEE Academic Track Symposium Convention")} className="flex items-center gap-1 text-[11px] text-slate-700 font-bold pt-1 cursor-pointer"><Plus size={12}/> Add Conference Entry</button>
+                    <button onClick={() => addArrayElement("conferences_attended", "IEEE Academic Track Symposium Convention")} className="flex items-center gap-1 text-[11px] text-slate-700 font-bold pt-1 cursor-pointer"><Plus size={12} /> Add Conference Entry</button>
                   )}
                 </div>
               </div>
@@ -939,21 +937,20 @@ function FacultyDetailProfilePage() {
                 {editState.documents.map((doc: ProfileDocument, idx: number) => {
                   const hasDoc = Boolean(doc.document_url && doc.document_url.trim() !== "");
                   const assetUrl = hasDoc ? getAssetUrl(doc.document_url) : "";
-                  
+
                   // Color accents by category
-                  const categoryBadgeColor = 
+                  const categoryBadgeColor =
                     doc.category === "Resume/CV" ? "bg-indigo-50 text-indigo-700 border-indigo-200" :
-                    doc.category === "Certificate" ? "bg-emerald-50 text-emerald-700 border-emerald-200" :
-                    doc.category === "Publication" ? "bg-blue-50 text-blue-700 border-blue-200" :
-                    doc.category === "Experience Letter" ? "bg-amber-50 text-amber-700 border-amber-200" :
-                    "bg-slate-100 text-slate-700 border-slate-200";
+                      doc.category === "Certificate" ? "bg-emerald-50 text-emerald-700 border-emerald-200" :
+                        doc.category === "Publication" ? "bg-blue-50 text-blue-700 border-blue-200" :
+                          doc.category === "Experience Letter" ? "bg-amber-50 text-amber-700 border-amber-200" :
+                            "bg-slate-100 text-slate-700 border-slate-200";
 
                   return (
                     <div
                       key={doc.id || idx}
-                      className={`p-5 rounded-2xl border transition-all ${
-                        isEditMode ? "bg-amber-500/5 border-amber-200" : "bg-slate-50/70 hover:bg-white border-slate-200 hover:shadow-md"
-                      }`}
+                      className={`p-5 rounded-2xl border transition-all ${isEditMode ? "bg-amber-500/5 border-amber-200" : "bg-slate-50/70 hover:bg-white border-slate-200 hover:shadow-md"
+                        }`}
                     >
                       {isEditMode ? (
                         /* Edit mode card form */

@@ -63,12 +63,12 @@ export const getDashboardData = createServerFn({ method: "GET" })
 
       const [noticesCountResult] = await db.select({ val: count() }).from(notices);
       const [galleryCountResult] = await db.select({ val: count() }).from(campusGallery);
-      
+
       const [linkedinCountResult] = await db
         .select({ val: count() })
         .from(socialPosts)
         .where(eq(socialPosts.platform, "linkedin"));
-        
+
       const [instagramCountResult] = await db
         .select({ val: count() })
         .from(socialPosts)
@@ -115,7 +115,7 @@ export const getDashboardData = createServerFn({ method: "GET" })
     }
   });
 
-export const Route = createFileRoute("/admin/")({
+export const Route = createFileRoute("/mgmt-9f3a2b1c")({
   component: AdminPageRouter,
 });
 
@@ -184,7 +184,7 @@ function AdminLoginPage() {
         } else {
           setErrorMsg("An unexpected authentication error occurred.");
         }
-        
+
         try {
           const newUrl = window.location.pathname;
           window.history.replaceState(null, "", newUrl);
@@ -431,14 +431,14 @@ function AdminDashboard() {
   const { logout } = useAdmin();
   const navigate = useNavigate();
   const router = useRouter();
-  
+
   const [activeTab, setActiveTab] = useState<"overview" | "notices" | "gallery" | "posts" | "connections">("overview");
   const [dashboardData, setDashboardData] = useState<any>(null);
   const [healthData, setHealthData] = useState<any>(null);
   const [connections, setConnections] = useState<any>(null);
   const [diagnostics, setDiagnostics] = useState<any>(null);
   const [linkedinPosts, setLinkedinPosts] = useState<any[]>([]);
-  
+
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
 
@@ -795,7 +795,7 @@ function AdminDashboard() {
           <button
             onClick={async () => {
               await logout();
-              navigate({ to: "/admin" });
+              navigate({ to: "/mgmt-9f3a2b1c" });
             }}
             className="flex items-center gap-1.5 text-xs font-bold bg-white/10 hover:bg-white/20 px-3.5 py-2 rounded-xl transition cursor-pointer border border-white/10"
           >
@@ -810,51 +810,46 @@ function AdminDashboard() {
         <aside className="w-full md:w-64 bg-white dark:bg-slate-900 border-b md:border-b-0 md:border-r border-slate-200 dark:border-slate-800 p-4 shrink-0 flex flex-row md:flex-col gap-1 overflow-x-auto md:overflow-x-visible">
           <button
             onClick={() => setActiveTab("overview")}
-            className={`w-full text-left px-4 py-3 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-2.5 transition cursor-pointer ${
-              activeTab === "overview"
-                ? "bg-[#0F4C81]/15 text-[#0F4C81] dark:bg-sky-500/10 dark:text-sky-400"
-                : "text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800"
-            }`}
+            className={`w-full text-left px-4 py-3 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-2.5 transition cursor-pointer ${activeTab === "overview"
+              ? "bg-[#0F4C81]/15 text-[#0F4C81] dark:bg-sky-500/10 dark:text-sky-400"
+              : "text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800"
+              }`}
           >
             <Activity className="w-4 h-4" /> Overview
           </button>
           <button
             onClick={() => setActiveTab("notices")}
-            className={`w-full text-left px-4 py-3 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-2.5 transition cursor-pointer ${
-              activeTab === "notices"
-                ? "bg-[#0F4C81]/15 text-[#0F4C81] dark:bg-sky-500/10 dark:text-sky-400"
-                : "text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800"
-            }`}
+            className={`w-full text-left px-4 py-3 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-2.5 transition cursor-pointer ${activeTab === "notices"
+              ? "bg-[#0F4C81]/15 text-[#0F4C81] dark:bg-sky-500/10 dark:text-sky-400"
+              : "text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800"
+              }`}
           >
             <FileText className="w-4 h-4" /> Notice Board
           </button>
           <button
             onClick={() => setActiveTab("gallery")}
-            className={`w-full text-left px-4 py-3 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-2.5 transition cursor-pointer ${
-              activeTab === "gallery"
-                ? "bg-[#0F4C81]/15 text-[#0F4C81] dark:bg-sky-500/10 dark:text-sky-400"
-                : "text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800"
-            }`}
+            className={`w-full text-left px-4 py-3 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-2.5 transition cursor-pointer ${activeTab === "gallery"
+              ? "bg-[#0F4C81]/15 text-[#0F4C81] dark:bg-sky-500/10 dark:text-sky-400"
+              : "text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800"
+              }`}
           >
             <ImageIcon className="w-4 h-4" /> Campus Gallery
           </button>
           <button
             onClick={() => setActiveTab("posts")}
-            className={`w-full text-left px-4 py-3 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-2.5 transition cursor-pointer ${
-              activeTab === "posts"
-                ? "bg-[#0F4C81]/15 text-[#0F4C81] dark:bg-sky-500/10 dark:text-sky-400"
-                : "text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800"
-            }`}
+            className={`w-full text-left px-4 py-3 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-2.5 transition cursor-pointer ${activeTab === "posts"
+              ? "bg-[#0F4C81]/15 text-[#0F4C81] dark:bg-sky-500/10 dark:text-sky-400"
+              : "text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800"
+              }`}
           >
             <Briefcase className="w-4 h-4" /> LinkedIn Posts
           </button>
           <button
             onClick={() => setActiveTab("connections")}
-            className={`w-full text-left px-4 py-3 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-2.5 transition cursor-pointer ${
-              activeTab === "connections"
-                ? "bg-[#0F4C81]/15 text-[#0F4C81] dark:bg-sky-500/10 dark:text-sky-400"
-                : "text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800"
-            }`}
+            className={`w-full text-left px-4 py-3 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-2.5 transition cursor-pointer ${activeTab === "connections"
+              ? "bg-[#0F4C81]/15 text-[#0F4C81] dark:bg-sky-500/10 dark:text-sky-400"
+              : "text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800"
+              }`}
           >
             <Globe className="w-4 h-4" /> Connections
           </button>
@@ -925,7 +920,7 @@ function AdminDashboard() {
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl shadow-sm lg:col-span-2 space-y-4">
                   <h3 className="text-xs font-black uppercase tracking-wider text-slate-400">Recent Social Activity Logs</h3>
-                  
+
                   {dashboardData?.recentPosts && dashboardData.recentPosts.length > 0 ? (
                     <div className="overflow-x-auto">
                       <table className="w-full text-left border-collapse text-xs">
@@ -941,11 +936,10 @@ function AdminDashboard() {
                           {dashboardData.recentPosts.map((post: any) => (
                             <tr key={post.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/20">
                               <td className="py-3.5 font-semibold">
-                                <span className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold border uppercase ${
-                                  post.platform === "linkedin"
-                                    ? "bg-blue-50 text-blue-700 border-blue-100 dark:bg-blue-955/20 dark:text-blue-450 dark:border-blue-900/40"
-                                    : "bg-pink-50 text-pink-700 border-pink-100 dark:bg-pink-955/20 dark:text-pink-450 dark:border-pink-900/40"
-                                }`}>
+                                <span className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold border uppercase ${post.platform === "linkedin"
+                                  ? "bg-blue-50 text-blue-700 border-blue-100 dark:bg-blue-955/20 dark:text-blue-450 dark:border-blue-900/40"
+                                  : "bg-pink-50 text-pink-700 border-pink-100 dark:bg-pink-955/20 dark:text-pink-450 dark:border-pink-900/40"
+                                  }`}>
                                   {post.platform === "linkedin" ? <Briefcase className="w-2.5 h-2.5" /> : <Camera className="w-2.5 h-2.5" />}
                                   {post.platform}
                                 </span>
@@ -957,11 +951,10 @@ function AdminDashboard() {
                                 {new Date(post.publishedAt).toLocaleDateString()} {new Date(post.publishedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                               </td>
                               <td className="py-3.5 text-right">
-                                <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-black uppercase ${
-                                  post.status === "published"
-                                    ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/30 dark:text-emerald-400"
-                                    : "bg-rose-50 text-rose-700 dark:bg-rose-950/30 dark:text-rose-400"
-                                }`}>
+                                <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-black uppercase ${post.status === "published"
+                                  ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/30 dark:text-emerald-400"
+                                  : "bg-rose-50 text-rose-700 dark:bg-rose-950/30 dark:text-rose-400"
+                                  }`}>
                                   {post.status === "published" ? <Check className="w-2.5 h-2.5" /> : <AlertTriangle className="w-2.5 h-2.5" />}
                                   {post.status}
                                 </span>
@@ -981,7 +974,7 @@ function AdminDashboard() {
 
                 <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl shadow-sm space-y-4">
                   <h3 className="text-xs font-black uppercase tracking-wider text-slate-400">OAuth Connections</h3>
-                  
+
                   {/* LinkedIn */}
                   <div className="p-4 rounded-2xl border border-slate-100 dark:border-slate-800 bg-slate-50/40 dark:bg-slate-850/20 flex flex-col gap-2">
                     <div className="flex items-center justify-between">
@@ -1199,7 +1192,7 @@ function AdminDashboard() {
                       </button>
                     )}
                   </div>
-                  
+
                   <form onSubmit={editingNotice ? handleUpdateNoticeSubmit : handleAddNoticeSubmit} className="space-y-4">
                     <div className="space-y-1">
                       <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500 block">Notice Title</label>
@@ -1360,11 +1353,10 @@ function AdminDashboard() {
                               </button>
                               <button
                                 onClick={() => setSelectedNoticeForShare(selectedNoticeForShare === notice.id ? null : notice.id)}
-                                className={`p-1.5 rounded-lg border transition flex items-center justify-center cursor-pointer ${
-                                  selectedNoticeForShare === notice.id
-                                    ? "bg-blue-600 border-blue-600 text-white"
-                                    : "bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-350"
-                                }`}
+                                className={`p-1.5 rounded-lg border transition flex items-center justify-center cursor-pointer ${selectedNoticeForShare === notice.id
+                                  ? "bg-blue-600 border-blue-600 text-white"
+                                  : "bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-350"
+                                  }`}
                                 title="Share on Social Media"
                               >
                                 <Share2 className="w-3.5 h-3.5" />
@@ -1492,11 +1484,10 @@ function AdminDashboard() {
                             <div className="flex items-center gap-1.5 shrink-0">
                               <button
                                 onClick={() => setSelectedGalleryForShare(selectedGalleryForShare === item.id ? null : item.id)}
-                                className={`p-1.5 rounded-lg border transition flex items-center justify-center cursor-pointer ${
-                                  selectedGalleryForShare === item.id
-                                    ? "bg-blue-600 border-blue-600 text-white"
-                                    : "bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-350"
-                                }`}
+                                className={`p-1.5 rounded-lg border transition flex items-center justify-center cursor-pointer ${selectedGalleryForShare === item.id
+                                  ? "bg-blue-600 border-blue-600 text-white"
+                                  : "bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-350"
+                                  }`}
                                 title="Share on Social Media"
                               >
                                 <Share2 className="w-3.5 h-3.5" />
@@ -1609,11 +1600,10 @@ function AdminDashboard() {
                     <h3 className="text-sm font-bold flex items-center gap-2">
                       <Briefcase className="w-5 h-5 text-blue-600 animate-pulse" /> LinkedIn Integration
                     </h3>
-                    <span className={`px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider ${
-                      connections?.linkedin.connected 
-                        ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/30 dark:text-emerald-400" 
-                        : "bg-slate-50 text-slate-400 dark:bg-slate-800/40"
-                    }`}>
+                    <span className={`px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider ${connections?.linkedin.connected
+                      ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/30 dark:text-emerald-400"
+                      : "bg-slate-50 text-slate-400 dark:bg-slate-800/40"
+                      }`}>
                       {connections?.linkedin.connected ? "Connected" : "Disconnected"}
                     </span>
                   </div>
@@ -1645,11 +1635,10 @@ function AdminDashboard() {
                             toast.error("LinkedIn configuration is incomplete. Check environment variables.");
                           }
                         }}
-                        className={`inline-flex items-center justify-center w-full px-4 py-3 text-white rounded-xl text-xs font-bold transition shadow-sm ${
-                          diagnostics?.linkedin.ready 
-                            ? "bg-blue-600 hover:bg-blue-700 cursor-pointer" 
-                            : "bg-slate-300 dark:bg-slate-800 text-slate-400 dark:text-slate-500 cursor-not-allowed"
-                        }`}
+                        className={`inline-flex items-center justify-center w-full px-4 py-3 text-white rounded-xl text-xs font-bold transition shadow-sm ${diagnostics?.linkedin.ready
+                          ? "bg-blue-600 hover:bg-blue-700 cursor-pointer"
+                          : "bg-slate-300 dark:bg-slate-800 text-slate-400 dark:text-slate-500 cursor-not-allowed"
+                          }`}
                       >
                         Connect LinkedIn (OAuth)
                       </a>
@@ -1682,11 +1671,10 @@ function AdminDashboard() {
                     <h3 className="text-sm font-bold flex items-center gap-2">
                       <Camera className="w-5 h-5 text-pink-650 animate-pulse" /> Instagram Integration
                     </h3>
-                    <span className={`px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider ${
-                      connections?.instagram.connected 
-                        ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/30 dark:text-emerald-400" 
-                        : "bg-slate-50 text-slate-400 dark:bg-slate-800/40"
-                    }`}>
+                    <span className={`px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider ${connections?.instagram.connected
+                      ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/30 dark:text-emerald-400"
+                      : "bg-slate-50 text-slate-400 dark:bg-slate-800/40"
+                      }`}>
                       {connections?.instagram.connected ? "Connected" : "Disconnected"}
                     </span>
                   </div>
@@ -1718,11 +1706,10 @@ function AdminDashboard() {
                             toast.error("Instagram configuration is incomplete. Check environment variables.");
                           }
                         }}
-                        className={`inline-flex items-center justify-center w-full px-4 py-3 text-white rounded-xl text-xs font-bold transition shadow-sm ${
-                          diagnostics?.instagram.ready 
-                            ? "bg-pink-600 hover:bg-pink-700 cursor-pointer" 
-                            : "bg-slate-300 dark:bg-slate-800 text-slate-400 dark:text-slate-500 cursor-not-allowed"
-                        }`}
+                        className={`inline-flex items-center justify-center w-full px-4 py-3 text-white rounded-xl text-xs font-bold transition shadow-sm ${diagnostics?.instagram.ready
+                          ? "bg-pink-600 hover:bg-pink-700 cursor-pointer"
+                          : "bg-slate-300 dark:bg-slate-800 text-slate-400 dark:text-slate-500 cursor-not-allowed"
+                          }`}
                       >
                         Connect Instagram (Meta OAuth)
                       </a>

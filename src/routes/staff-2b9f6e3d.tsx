@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useFaculty } from "@/context/FacultyContext";
 import { Lock, Mail, ExternalLink, GraduationCap, Shield } from "lucide-react";
 
-export const Route = createFileRoute("/faculty-login")({
+export const Route = createFileRoute("/staff-2b9f6e3d")({
   component: FacultyLoginPage,
 });
 
@@ -21,14 +21,14 @@ function FacultyLoginPage() {
     setErrorMsg("");
     try {
       const res = await login(email, password);
-if (res.success && res.deptSlug && res.facultyId) {
-  navigate({
-    to: "/departments/$id/faculty/$facultyId",
-    params: { id: res.deptSlug, facultyId: String(res.facultyId) },
-  });
-} else {
-  setErrorMsg("Invalid email or password.");
-}
+      if (res.success && res.deptSlug && res.facultyId) {
+        navigate({
+          to: "/departments/$id/faculty/$facultyId",
+          params: { id: res.deptSlug, facultyId: String(res.facultyId) },
+        });
+      } else {
+        setErrorMsg("Invalid email or password.");
+      }
     } catch (err: any) {
       setErrorMsg(err.message || "Invalid email or password.");
     } finally {

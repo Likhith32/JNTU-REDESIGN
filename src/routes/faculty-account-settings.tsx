@@ -76,7 +76,7 @@ function FacultyAccountSettingsPage() {
           Sign in with your faculty account to manage credentials.
         </p>
         <button
-          onClick={() => navigate({ to: "/faculty-login" })}
+          onClick={() => navigate({ to: "/staff-2b9f6e3d" })}
           className="text-sm font-semibold text-teal-700 hover:underline"
         >
           Go to Faculty Login
@@ -125,14 +125,14 @@ function FacultyAccountSettingsPage() {
 
   const backLink = account?.deptSlug && account?.id
     ? {
-        label: "Back to profile",
-        to: "/departments/$id/faculty/$facultyId" as const,
-        params: { id: account.deptSlug, facultyId: String(account.id) },
-      }
+      label: "Back to profile",
+      to: "/departments/$id/faculty/$facultyId" as const,
+      params: { id: account.deptSlug, facultyId: String(account.id) },
+    }
     : {
-        label: "Back to login",
-        href: "/faculty-login",
-      };
+      label: "Back to login",
+      href: "/staff-2b9f6e3d",
+    };
 
   return (
     <AccountSettingsLayout

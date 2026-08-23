@@ -55,7 +55,7 @@ function HodAccountSettingsPage() {
         <p className="text-sm text-muted-foreground">
           Sign in as Head of Department to change your access password.
         </p>
-        <a href="/hod-login" className="text-sm font-semibold text-indigo-700 hover:underline">
+        <a href="/dept-7e1c4d8a" className="text-sm font-semibold text-indigo-700 hover:underline">
           Go to HOD Login
         </a>
       </div>

@@ -261,7 +261,7 @@ export const loginHod = createServerFn({ method: "POST" })
 
     return { success: true, deptSlug };
   });
-  
+
 export const getCurrentHodDept = createServerFn({ method: "GET" }).handler(async () => {
   const { getCookie } = await import("@tanstack/react-start/server");
   const deptId = getCookie("hod_session_dept");
@@ -285,7 +285,7 @@ export const initiateGoogleLogin = createServerFn({
   const secure = process.env.NODE_ENV === "production";
   const { setCookie } = await import("@tanstack/react-start/server");
   const { authService } = await import("./auth.service");
-  
+
   // Store state in an HTTP-only secure cookie
   setCookie("google_oauth_state", state, {
     httpOnly: true,
@@ -294,10 +294,10 @@ export const initiateGoogleLogin = createServerFn({
     maxAge,
     sameSite: "lax",
   });
-  
+
   // Generate OAuth redirect URL
   const googleUrl = authService.getGoogleAuthUrl(state);
-  
+
   throw redirect({
     href: googleUrl,
   });
@@ -317,7 +317,7 @@ export const handleGoogleCallback = createServerFn({ method: "POST" })
 
     if (!savedState || savedState !== state) {
       throw redirect({
-        to: "/admin",
+        to: "/mgmt-9f3a2b1c",
         search: { tab: "login" } as any,
       });
     }
@@ -327,7 +327,7 @@ export const handleGoogleCallback = createServerFn({ method: "POST" })
       const admin = await authRepository.findAdminByEmail(email);
       if (!admin) {
         throw redirect({
-          to: "/admin",
+          to: "/mgmt-9f3a2b1c",
           search: { tab: "login" } as any,
         });
       }
@@ -343,12 +343,12 @@ export const handleGoogleCallback = createServerFn({ method: "POST" })
       });
 
       throw redirect({
-        to: "/admin",
+        to: "/mgmt-9f3a2b1c",
       });
     } catch (err: any) {
       if (err?.to) throw err;
       throw redirect({
-        to: "/admin",
+        to: "/mgmt-9f3a2b1c",
         search: { tab: "login" } as any,
       });
     }

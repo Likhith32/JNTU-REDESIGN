@@ -45,14 +45,14 @@ export const Route = createFileRoute("/auth/google/callback")({
     // 2. Defensive handling: If Google returned an error query parameter, redirect to login page with error details
     if (error) {
       throw redirect({
-        to: "/admin",
+        to: "/mgmt-9f3a2b1c",
       });
     }
 
     // 3. Defensive handling: If code or state are missing, redirect to admin login page with missing parameter error
     if (!code || !state) {
       throw redirect({
-        to: "/admin",
+        to: "/mgmt-9f3a2b1c",
       });
     }
 

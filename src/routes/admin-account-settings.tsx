@@ -59,7 +59,7 @@ function AdminAccountSettingsPage() {
           Sign in as an administrator to manage your account.
         </p>
         <button
-          onClick={() => navigate({ to: "/admin" })}
+          onClick={() => navigate({ to: "/mgmt-9f3a2b1c" })}
           className="text-sm font-semibold text-primary hover:underline"
         >
           Go to Admin Login

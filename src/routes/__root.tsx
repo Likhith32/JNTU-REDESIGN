@@ -174,10 +174,10 @@ function AdminContent() {
 
   // Entry and account-settings routes where full site chrome (Navbar, Footer, Chatbot) is hidden
   const HIDE_CHROME_ROUTES = new Set([
-    "/admin",
-    "/admin/",
-    "/faculty-login",
-    "/hod-login",
+    "/mgmt-9f3a2b1c",
+    "/mgmt-9f3a2b1c/",
+    "/staff-2b9f6e3d",
+    "/dept-7e1c4d8a",
     "/hod-account-settings",
     "/hod-account-settings/",
     "/faculty-account-settings",
@@ -234,8 +234,8 @@ function AdminContent() {
             <button
               onClick={handleEditToggleClick}
               className={`flex items-center gap-2 px-2.5 py-1 rounded-full text-[9px] md:text-[10px] font-bold uppercase tracking-wider transition-all border shrink-0 ${currentEditActive
-                  ? "bg-primary/20 border-primary text-primary shadow-[0_0_10px_rgba(var(--primary-rgb),0.3)]"
-                  : "bg-zinc-800 border-zinc-700 text-zinc-400 hover:border-zinc-500"
+                ? "bg-primary/20 border-primary text-primary shadow-[0_0_10px_rgba(var(--primary-rgb),0.3)]"
+                : "bg-zinc-800 border-zinc-700 text-zinc-400 hover:border-zinc-500"
                 }`}
             >
               <div className={`w-1.5 h-1.5 rounded-full ${currentEditActive ? "bg-primary animate-pulse" : "bg-zinc-600"}`} />
@@ -293,4 +293,4 @@ function AdminContent() {
   );
 }
 
-
+
