@@ -515,7 +515,7 @@ function HomePage() {
                     <div className="space-y-4">
                       <div>
                         <div className="text-[10px] uppercase tracking-[0.25em] text-primary font-black mb-2">Leadership</div>
-                        <h3 className="text-2xl font-bold text-ink leading-tight">{principal?.name || "Dr. K. Chandra Bhushana Rao"}</h3>
+                        <h3 className="text-2xl font-bold text-ink leading-tight">{principal?.name || "Dr. V. S. Vakula"}</h3>
                         <p className="text-muted-foreground text-sm font-medium mt-1">
                           {principal?.designation?.includes(',') ? principal.designation.split(',').slice(1).join(',') : "Principal, JNTU-GV CEV"}
                         </p>
@@ -524,7 +524,7 @@ function HomePage() {
                       <div className="relative">
                         <Quote className="h-10 w-10 text-primary/10 absolute -top-4 -left-4 -z-10" />
                         <p className="text-sm text-muted-foreground leading-relaxed italic">
-                          "{principal?.quote || "Our goal is to produce engineers who are not only technically competent but also socially sensitive to global challenges."}"
+                          "{principal?.quote || "Empowering students through academic excellence, innovative engineering education, and holistic development to meet global challenges."}"
                         </p>
                       </div>
 

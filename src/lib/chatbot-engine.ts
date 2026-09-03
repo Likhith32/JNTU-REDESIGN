@@ -288,8 +288,8 @@ const KB = {
     email: "registrar@jntugv.edu.in",
   },
   principal: {
-    name: "Prof. Kota Chandra Bhushana Rao",
-    designation: "Professor & Principal (i/c)",
+    name: "Dr. V. S. Vakula",
+    designation: "Principal",
     email: "principal@jntugvcev.edu.in",
   },
   vicePrincipal: {
@@ -373,7 +373,7 @@ function buildAnswer(
 
   // ── PRINCIPAL ──
   if (intents.includes("principal") && !intents.includes("vice_principal")) {
-    const extra = rel(["principal", "prof", "kota", "bhushana"]);
+    const extra = rel(["principal", "dr", "vakula"]);
     if (isTe) return `మా కళాశాల ప్రిన్సిపల్ **${KB.principal.name}** గారు (${KB.principal.designation}).\n📧 ${KB.principal.email}${extra ? `\n\n${extra}` : ""}`;
     return `The Principal of JNTU-GV CEV is **${KB.principal.name}** (${KB.principal.designation}).\n📧 Email: [${KB.principal.email}](mailto:${KB.principal.email})${extra ? `\n\n${extra}` : ""}`;
   }
@@ -633,7 +633,7 @@ if (intents.includes("alumni")) {
   if (intents.includes("faculty")) {
     const qLower = query.toLowerCase();
     const allPeople = [
-      { name: "Prof. Kota Chandra Bhushana Rao", designation: "Professor & Principal (i/c)", department: "Principal Office", email: "principal@jntugvcev.edu.in" },
+      { name: "Dr. V. S. Vakula", designation: "Principal", department: "Principal Office", email: "principal@jntugvcev.edu.in" },
       { name: "Prof. G. J. Naga Raju", designation: "Vice Principal & HOD of S&H", department: "Basic Sciences & Humanities", email: "viceprincipal@jntugvcev.edu.in" },
       ...KB.hods.map(h => ({ name: h.name, designation: h.designation, department: h.dept, email: h.email })),
       ...KB.faculty,

@@ -5,7 +5,7 @@
 - **Status**: Constituent University Autonomous College of Jawaharlal Nehru Technological University Gurajada Vizianagaram
 - **Established**: 2007
 - **Campus**: 100+ Acres lush green campus at Dwarapudi, Vizianagaram, Andhra Pradesh (PIN: 535003)
-- **Principal (i/c)**: Prof. Kota Chandra Bhushana Rao (`principal@jntugvcev.edu.in`)
+- **Principal**: Dr. V. S. Vakula (`principal@jntugvcev.edu.in`)
 - **Vice Principal**: Prof. G. J. Naga Raju (`viceprincipal@jntugvcev.edu.in`)
 - **Website**: https://jntugvcev.edu.in
 - **Helpline Phone**: +91 8922 244 100

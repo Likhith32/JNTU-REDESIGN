@@ -101,10 +101,10 @@ const FALLBACK_VCS = [
 const FALLBACK_PRINCIPALS = [
   {
     id: 1,
-    name: "Prof. Kota Chandra Bhushana Rao",
+    name: "Dr. V. S. Vakula",
     designation: "Principal, College of Engineering",
     message: "Our focus is to provide high-quality technical education, promote research activities, and ensure our graduates are equipped with values and competencies for global success.",
-    image_url: "http://89.116.134.182/local-assets/uploads/images/administration/principal.jpeg",
+    image_url: "http://89.116.134.182/local-assets/uploads/images/administration/principal-1788413473-42996f.jpg",
   },
 ];
 
