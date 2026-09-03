@@ -437,6 +437,31 @@ export interface JntugvGalleryItem {
   imglink: string;
 }
 
+// Helper to format and correct gallery event titles and descriptions
+function formatGalleryTitle(title: string): string {
+  const trimmed = (title || "").trim();
+  if (/^THE FIRST CONVOCATION/i.test(trimmed)) return "1st Convocation of JNTU-GV";
+  if (/^Online Services for Certificates/i.test(trimmed)) return "Online Services for Certificates Launched by Hon'ble Vice-Chancellor";
+  if (/^Closing ceremony of International YogaDay/i.test(trimmed)) return "Closing Ceremony of International Yoga Day Celebrations";
+  if (/^Swarna Andhra.*Clean Sweep/i.test(trimmed)) return "Swarna Andhra - Swachha Andhra (SASA) Clean Sweep Program";
+  if (/^Admissions Open.*IIBMP/i.test(trimmed)) return "Admissions Open 2026 for IIBMP International Programmes";
+  if (/^Celebrating World Environment Day/i.test(trimmed)) return "Celebrating World Environment Day at JNTU-GV";
+  if (/^Free German Language Training/i.test(trimmed)) return "Free German Language Training Program for ITI Candidates";
+  if (/^JNTU-GV signed an MoU with The Reutlingen/i.test(trimmed)) return "MoU with Reutlingen University Knowledge Foundation (KFRU), Germany";
+  if (/^Association of Indian universities/i.test(trimmed)) return "AIU South Zone Vice Chancellors Meet 2025 - 2026";
+  if (/^JNTU-GV Faclitating/i.test(trimmed)) return "JNTU-GV Facilitating E-Bikes for Campus Security";
+  if (/^JNTUGV- celebrated and hounoured/i.test(trimmed)) return "Sri Vasireddy Venkatadri Naidu Jayanthi Celebrations";
+  if (/^JNTUGV celebrated the occasion.*Ambedkar/i.test(trimmed)) return "Dr. B.R. Ambedkar Jayanthi Celebrations at JNTU-GV";
+  if (/^The inauguration of the Water Conservation/i.test(trimmed)) return "Inauguration of Water Conservation Scheme at Campus";
+  if (/^Dr\. Babu Jagjivan Ram’s birthday/i.test(trimmed)) return "Dr. Babu Jagjivan Ram Jayanthi Celebrations";
+  if (/^Prof\. D\. Rajya Lakshmi Assuming/i.test(trimmed)) return "Prof. D. Rajya Lakshmi Assuming Charge as Registrar In-Charge";
+  if (/^JNTU-GV Annual Day/i.test(trimmed)) return "JNTU-GV Annual Day & Sports Celebrations 2026";
+  if (/^JNTU-GV has entered into a strategic/i.test(trimmed)) return "Strategic MoU with ExcelR for Student Skill Development";
+  if (/^SMART HOSTEL MANAGEMENT SYSTEM/i.test(trimmed)) return "Smart Hostel Management System Inauguration";
+  if (/^Inaguration of Bus Donated by SBI/i.test(trimmed)) return "Inauguration of College Bus Donated by State Bank of India";
+  return trimmed;
+}
+
 export const getJntugvGalleryImages = createServerFn({
   method: "GET",
 }).handler(async (): Promise<JntugvGalleryItem[]> => {
@@ -459,6 +484,8 @@ export const getJntugvGalleryImages = createServerFn({
     },
   ];
 
+  let rawPool: JntugvGalleryItem[] = [];
+
   try {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 800); // 800ms fast timeout
@@ -473,38 +500,66 @@ export const getJntugvGalleryImages = createServerFn({
         const filtered = data.filter(
           (img: JntugvGalleryItem) =>
             img.admin_approval === "accepted" &&
-            img.carousel_scrolling === "yes",
+            (img.carousel_scrolling === "yes" || img.gallery_scrolling === "yes"),
         );
-        const combined = [...featuredItems, ...filtered];
-        serverCache.set("jntugv_gallery_external", combined, 60 * 60 * 1000); // 1 hour
-        return combined;
+        rawPool = [...featuredItems, ...filtered];
       }
     }
   } catch {
     // Graceful fallback to bundled high-speed gallery dataset
   }
 
-  const fallback = jntugvGalleryData as JntugvGalleryItem[];
-  const filtered = fallback.filter(
-    (img) =>
-      img.id !== 166 && // Prevent duplicate of featured item 166
-      img.admin_approval === "accepted" &&
-      (img.carousel_scrolling === "yes" || img.gallery_scrolling === "yes"),
-  );
+  if (rawPool.length === 0) {
+    const fallback = jntugvGalleryData as JntugvGalleryItem[];
+    const filtered = fallback.filter(
+      (img) =>
+        img.id !== 166 && // Prevent duplicate of featured item 166
+        img.admin_approval === "accepted" &&
+        (img.carousel_scrolling === "yes" || img.gallery_scrolling === "yes"),
+    );
+    rawPool = [...featuredItems, ...filtered];
+  }
 
-  // Strictly deduplicate by ID and Title
+  // Sort rawPool strictly by date descending (latest first)
+  rawPool.sort((a, b) => {
+    const timeA = new Date(a.date || 0).getTime();
+    const timeB = new Date(b.date || 0).getTime();
+    return timeB - timeA;
+  });
+
+  // Strictly deduplicate by ID and cleaned Title
   const seenIds = new Set<number>();
   const seenTitles = new Set<string>();
   const combined: JntugvGalleryItem[] = [];
 
-  for (const item of [...featuredItems, ...filtered]) {
-    const cleanTitle = (item.title || "").trim().toLowerCase();
-    if (!seenIds.has(item.id) && !seenTitles.has(cleanTitle)) {
+  for (const item of rawPool) {
+    const formattedTitle = formatGalleryTitle(item.title);
+    const cleanKey = formattedTitle.toLowerCase();
+    if (!seenIds.has(item.id) && !seenTitles.has(cleanKey)) {
       seenIds.add(item.id);
-      if (cleanTitle) seenTitles.add(cleanTitle);
-      combined.push(item);
+      if (cleanKey) seenTitles.add(cleanKey);
+
+      const cleanImglink = item.imglink?.startsWith("http")
+        ? encodeURI(item.imglink)
+        : item.imglink;
+
+      combined.push({
+        ...item,
+        title: formattedTitle,
+        description: item.description && item.description.trim() && item.description !== item.title
+          ? item.description.trim()
+          : formattedTitle,
+        imglink: cleanImglink,
+      });
     }
   }
+
+  // Final sort to strictly guarantee chronological descending order
+  combined.sort((a, b) => {
+    const timeA = new Date(a.date || 0).getTime();
+    const timeB = new Date(b.date || 0).getTime();
+    return timeB - timeA;
+  });
 
   serverCache.set("jntugv_gallery_external", combined, 60 * 60 * 1000);
   return combined;

@@ -286,39 +286,37 @@ function HomePage() {
     queryFn: () => getJntugvGalleryImages(),
     ...QUERY_CACHE,
   });
-
   const { data: dbGallery = [] } = useQuery({
     queryKey: ["campus-gallery-db"],
     queryFn: () => getCampusGallery(),
     ...QUERY_CACHE,
   });
 
-  // Select a diverse mix of recent + randomized items across unique campus events (strictly deduplicated)
+  // Select the latest items sorted strictly by date descending (NO random, only latest unique events)
   const homepageSelectedImages = useMemo(() => {
     if (!galleryImages || galleryImages.length === 0) return [];
 
-    // Strictly deduplicate by event title and ID
-    const uniqueMap = new Map<string, (typeof galleryImages)[0]>();
+    // Strictly sort by date descending (latest first)
+    const sorted = [...galleryImages].sort((a, b) => {
+      const timeA = new Date(a.date || 0).getTime();
+      const timeB = new Date(b.date || 0).getTime();
+      return timeB - timeA;
+    });
 
-    for (const item of galleryImages) {
+    // Deduplicate so each unique event gets 1 prominent card
+    const uniqueList: typeof galleryImages = [];
+    const seenTitles = new Set<string>();
+
+    for (const item of sorted) {
       const cleanKey = (item.title || "").trim().toLowerCase();
-      if (cleanKey && !uniqueMap.has(cleanKey)) {
-        uniqueMap.set(cleanKey, item);
+      if (cleanKey && !seenTitles.has(cleanKey)) {
+        seenTitles.add(cleanKey);
+        uniqueList.push(item);
       }
+      if (uniqueList.length >= 7) break;
     }
 
-    const uniqueList = Array.from(uniqueMap.values());
-    if (uniqueList.length === 0) return [];
-
-    // 1 featured top recent item (Independence Day)
-    const topItem = uniqueList[0];
-    const rest = uniqueList.slice(1);
-
-    // Shuffle the rest of the pool for variety
-    const shuffled = [...rest].sort(() => 0.5 - Math.random());
-
-    // 1 top recent + 6 diverse random items = 7 items (8th card is Bento CTA)
-    return [topItem, ...shuffled.slice(0, 6)].slice(0, 7);
+    return uniqueList;
   }, [galleryImages]);
 
   const getFacilityImage = (title: string, staticImg: string) => {
@@ -341,12 +339,13 @@ function HomePage() {
       <section className="relative w-full overflow-hidden">
         <HeroSlideshow
           images={[
-            { src: hero5, alt: "JNTU-GV VIZIANAGARAM main building" },
-            { src: hero3, alt: "Students walking through campus" },
-            { src: hero4, alt: "Library at dusk" },
+            { src: hero5, alt: "JNTU-GV Vizianagaram Main Administration Building" },
+            { src: "/images/independence_day.webp", alt: "80th Independence Day Celebrations at JNTU-GV" },
+            { src: hero3, alt: "Students and Faculty at JNTU-GV Campus" },
+            { src: hero4, alt: "Dr. Y.S.R. Central Knowledge Commons & Library" },
+            { src: hero2, alt: "Campus Architecture and Laboratories" },
           ]}
           interval={6500}
-          minHeight="min(82vh, 680px)"
           overlay="linear-gradient(180deg, oklch(0.18 0.05 260 / 0.6) 0%, oklch(0.18 0.05 260 / 0.4) 40%, oklch(0.18 0.05 260 / 0.85) 100%)"
         >
           <div className="container-narrow h-full min-h-[min(82vh,680px)] flex flex-col justify-center pt-14 sm:pt-20 pb-10 text-white">

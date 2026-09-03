@@ -72,8 +72,14 @@ export function HeroGalleryMiniCarousel({
       });
     }
 
-    // 3. Add latest gallery images from API dataset
-    for (const img of galleryImages) {
+    // 3. Add latest gallery images from API dataset (strictly sorted by latest date)
+    const sortedGallery = [...galleryImages].sort((a, b) => {
+      const timeA = new Date(a.date || 0).getTime();
+      const timeB = new Date(b.date || 0).getTime();
+      return timeB - timeA;
+    });
+
+    for (const img of sortedGallery) {
       const rawTitle = (img.title || "").trim();
       const cleanKey = rawTitle.toLowerCase();
 
@@ -102,7 +108,7 @@ export function HeroGalleryMiniCarousel({
         });
       }
 
-      if (uniqueItemsMap.size >= 6) break;
+      if (uniqueItemsMap.size >= 8) break;
     }
 
     // 4. Fallback high-res campus items if needed (using fast local webp)

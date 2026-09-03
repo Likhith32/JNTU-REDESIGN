@@ -22,7 +22,8 @@ import {
   Linkedin,
   Image as ImageIcon,
   CheckCircle2,
-  Send
+  Send,
+  Calendar,
 } from "lucide-react";
 
 const campusImg = imageUrl("hero-carousal/hero-campus.jpg");
@@ -101,24 +102,35 @@ function GalleryPage() {
     id: -(img.id + 1000), // negative IDs to avoid collision
     src: img.imglink,
     caption: img.title || img.description,
+    date: img.date,
     isExternal: true,
   }));
 
-  const localImages = records.length > 0 ? records : [];
+  const localImages = (records.length > 0 ? records : []).map((r: any) => ({
+    ...r,
+    date: r.createdAt ? new Date(r.createdAt).toISOString().split("T")[0] : undefined,
+  }));
+
   const rawImages = [
     ...localImages,
     ...apiGalleryItems,
     ...(apiGalleryItems.length === 0 && localImages.length === 0 ? DEFAULT_IMAGES : []),
   ];
 
-  // Strictly deduplicate by caption/title and src
+  // Strictly deduplicate by caption/title and src, then sort strictly by date descending
   const seenKeys = new Set<string>();
-  const images = rawImages.filter((img) => {
-    const key = (img.caption || img.src || "").trim().toLowerCase();
-    if (!key || seenKeys.has(key)) return false;
-    seenKeys.add(key);
-    return true;
-  });
+  const images = rawImages
+    .filter((img) => {
+      const key = (img.caption || img.src || "").trim().toLowerCase();
+      if (!key || seenKeys.has(key)) return false;
+      seenKeys.add(key);
+      return true;
+    })
+    .sort((a: any, b: any) => {
+      const timeA = new Date(a.date || 0).getTime();
+      const timeB = new Date(b.date || 0).getTime();
+      return timeB - timeA;
+    });
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -375,6 +387,16 @@ function GalleryPage() {
                     smartFit={true}
                     wrapperClassName="w-full min-h-[220px] max-h-[480px] rounded-2xl border border-border/40 shadow-sm"
                   />
+
+                  {/* Date Badge Overlay */}
+                  {img.date && (
+                    <div className="absolute top-3 left-3 z-20 pointer-events-none">
+                      <span className="px-2.5 py-1 rounded-full bg-black/75 border border-white/20 text-white font-extrabold text-[10px] uppercase tracking-wider flex items-center gap-1.5 shadow-sm backdrop-blur-xs">
+                        <Calendar className="h-3 w-3 text-amber-400" />
+                        {img.date}
+                      </span>
+                    </div>
+                  )}
 
                   {/* Admin Direct Platform Controls Overlay on Image */}
                   {isAdmin && (
