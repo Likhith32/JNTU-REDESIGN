@@ -6,6 +6,11 @@ import { getAssetUrl } from "@/lib/assets";
 
 const NOTICES = [
   {
+    title: "Academic Calendar for I B.Tech (2026–2027)",
+    date: "August 21, 2026",
+    url: "https://jntugvcev.edu.in/wp-content/uploads/2026/08/academic-calendar-for-i-b-tech-2026-27.pdf",
+  },
+  {
     title: "Academic Calendar for II B.Tech (2026–2027)",
     date: "August 12, 2026",
     url: "https://jntugvcev.edu.in/wp-content/uploads/2026/08/ii-b-tech-academic-calendar-2026-2027.pdf",

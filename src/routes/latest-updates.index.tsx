@@ -99,13 +99,21 @@ function LatestUpdatesPage() {
                 >
                   <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
                     <div className="flex flex-col sm:flex-row items-start gap-5 sm:gap-6 max-w-3xl">
-                      {/* University Emblem */}
-                      <div className="shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white border border-slate-200/90 p-2 shadow-xs flex items-center justify-center group-hover:scale-105 transition-transform">
-                        <img
-                          src="/logo-circle.png"
-                          alt="JNTU-GV Emblem"
-                          className="w-full h-full object-contain"
-                        />
+                      {/* University Emblem / Clipping Thumbnail */}
+                      <div className="shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white border border-slate-200/90 p-1.5 shadow-xs flex items-center justify-center group-hover:scale-105 transition-transform overflow-hidden">
+                        {note.imageUrl ? (
+                          <img
+                            src={note.imageUrl}
+                            alt={note.title}
+                            className="w-full h-full object-cover rounded-xl"
+                          />
+                        ) : (
+                          <img
+                            src="/logo-circle.png"
+                            alt="JNTU-GV Emblem"
+                            className="w-full h-full object-contain"
+                          />
+                        )}
                       </div>
 
                       <div className="space-y-3 flex-1 min-w-0">

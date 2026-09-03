@@ -176,10 +176,24 @@ function PressNoteDetailPage() {
                 {/* Intro / Corrigendum Statement */}
                 <div className="p-6 rounded-2xl bg-blue-50/50 border border-blue-100 text-sm sm:text-base leading-relaxed font-medium text-slate-800">
                   <p className="font-bold text-primary mb-1 uppercase tracking-wider text-xs">
-                    Official Corrigendum
+                    {note.category === "PRESS COVERAGE" ? "Press Release Overview" : "Official Corrigendum"}
                   </p>
                   {note.excerpt}
                 </div>
+
+                {/* Newspaper Clipping Image if available */}
+                {note.imageUrl && (
+                  <div className="rounded-3xl overflow-hidden border border-slate-200 shadow-md bg-slate-50">
+                    <img
+                      src={note.imageUrl}
+                      alt={note.title}
+                      className="w-full h-auto max-h-[650px] object-contain mx-auto"
+                    />
+                    <div className="p-3 bg-slate-100/80 border-t border-slate-200 text-xs text-slate-600 text-center font-semibold">
+                      📰 Official Press Coverage Clipping — {note.title}
+                    </div>
+                  </div>
+                )}
 
                 {/* References */}
                 {note.references && note.references.length > 0 && (

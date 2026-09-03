@@ -22,6 +22,9 @@ export interface PressNote {
   notes: string[];
   signedBy: string;
   isCustom?: boolean;
+  imageUrl?: string;
+  sourceUrl?: string;
+  sourceName?: string;
 }
 
 export interface VideoItem {
@@ -35,8 +38,112 @@ export interface VideoItem {
   isCustom?: boolean;
 }
 
-// ── Default Real University Press Notes (Empty until published) ──
-export const PRESS_NOTES: PressNote[] = [];
+// ── Default Real University Press Notes (Official Press Coverage) ──
+export const PRESS_NOTES: PressNote[] = [
+  {
+    id: "press-1",
+    slug: "jntugv-80th-independence-day-sakshi-2026",
+    category: "PRESS COVERAGE",
+    title: "VC Subba Rao hoists national flag at JNTU-GV on Independence Day",
+    homepageDisplayDate: "17 AUG 2026",
+    publishedAt: "17/08/2026 09:00",
+    documentDate: "16/08/2026",
+    revisedDate: "17/08/2026",
+    status: "Published",
+    excerpt:
+      "At JNTU-GV, Vizianagaram Rural, Vice-Chancellor Prof. V.V. Subba Rao hoisted the national flag and paid tribute on Independence Day. NCC cadets and university officials joined the ceremony.",
+    documentUrl:
+      "https://jntugvcev.edu.in/wp-content/uploads/2026/08/press-sakshi-80th-independence-day-2026.jpg",
+    documentName: "Sakshi Newspaper Clipping — 80th Independence Day",
+    heading: "80TH INDEPENDENCE DAY CELEBRATIONS",
+    subject: "Sakshi newspaper clipping of Independence Day flag hoisting at JNTU-GV Vizianagaram",
+    references: [
+      "Sakshi e-paper (Mana Vizianagaram, 16/08/2026, Page 9)",
+      "WM UCEV Institutional Release",
+      "Source URL: https://epaper.sakshi.com/",
+    ],
+    schedule: [],
+    notes: [
+      "Vice-Chancellor Prof. V.V. Subba Rao hoisted the national flag and paid tribute on Independence Day. NCC cadets and university officials joined the ceremony.",
+      "Source: Sakshi e-paper (Mana Vizianagaram, 16/08/2026, Page 9). Used as official press coverage of the university event.",
+    ],
+    signedBy: "WM UCEV & University Public Relations Cell\nJNTU-GV Vizianagaram",
+    imageUrl:
+      "https://jntugvcev.edu.in/wp-content/uploads/2026/08/press-sakshi-80th-independence-day-2026-407x410.jpg",
+    sourceUrl: "https://epaper.sakshi.com/",
+    sourceName: "Sakshi e-paper",
+  },
+  {
+    id: "press-2",
+    slug: "jntugv-80th-independence-day-visalandhra-2026",
+    category: "PRESS COVERAGE",
+    title: "80th Independence Day celebrations at JNTU-GV Vizianagaram",
+    homepageDisplayDate: "17 AUG 2026",
+    publishedAt: "17/08/2026 09:30",
+    documentDate: "17/08/2026",
+    revisedDate: "17/08/2026",
+    status: "Published",
+    excerpt:
+      "JNTU-GV celebrated the 80th Independence Day at Vizianagaram. Vice-Chancellor Prof. V.V. Subba Rao hoisted the national flag and received the guard of honour. Registrar Prof. D. Rajya Lakshmi, College of Engineering Principal Prof. Kota Chandra Bhushan Rao, College of Pharmacy Principal Prof. K. Achyut Kumar, faculty, staff and students participated.",
+    documentUrl:
+      "https://jntugvcev.edu.in/wp-content/uploads/2026/08/press-visalandhra-80th-independence-day-2026-original.jpg",
+    documentName: "Visalandhra Press Coverage — 80th Independence Day",
+    heading: "INDEPENDENCE DAY CELEBRATIONS & GUARD OF HONOUR",
+    subject:
+      "Visalandhra press coverage of 80th Independence Day celebrations at JNTU-GV Vizianagaram",
+    references: [
+      "Visalandhra (Vizianagaram edition, 17/08/2026)",
+      "WM UCEV Institutional Release",
+    ],
+    schedule: [],
+    notes: [
+      "JNTU-GV celebrated the 80th Independence Day at Vizianagaram. Vice-Chancellor Prof. V.V. Subba Rao hoisted the national flag and received the guard of honour.",
+      "Registrar Prof. D. Rajya Lakshmi, College of Engineering Principal Prof. Kota Chandra Bhushan Rao, College of Pharmacy Principal Prof. K. Achyut Kumar, faculty, staff and students participated.",
+      "Source: Visalandhra (Vizianagaram edition). Used as press coverage of the university event.",
+    ],
+    signedBy: "WM UCEV & University Public Relations Cell\nJNTU-GV Vizianagaram",
+    imageUrl:
+      "https://jntugvcev.edu.in/wp-content/uploads/2026/08/press-visalandhra-80th-independence-day-2026-original-518x410.jpg",
+    sourceUrl:
+      "https://jntugvcev.edu.in/wp-content/uploads/2026/08/press-visalandhra-80th-independence-day-2026-original.jpg",
+    sourceName: "Visalandhra",
+  },
+  {
+    id: "press-3",
+    slug: "national-librarians-day-2024-ysr-central-library-akshara-kiranam",
+    category: "PRESS COVERAGE",
+    title:
+      "National Librarians Day celebrated at Dr. Y.S.R. Central Library, JNTU-GV Vizianagaram",
+    homepageDisplayDate: "12 AUG 2026",
+    publishedAt: "12/08/2026 11:00",
+    documentDate: "12/08/2026",
+    revisedDate: "12/08/2026",
+    status: "Published",
+    excerpt:
+      "JNTU-GV College of Engineering, Vizianagaram, celebrated National Librarians Day at Dr. Y.S.R. Central Library, marking the 134th birth anniversary of S.R. Ranganathan. A book exhibition of academic books worth about Rs. 10 lakh, supported by AICTE, was organised for Engineering, Technology, Management, Computer Science, Science and Humanities.",
+    documentUrl:
+      "https://jntugvcev.edu.in/wp-content/uploads/2026/08/national-librarians-day-2024-akshara-kiranam-750x410.jpg",
+    documentName: "Akshara Kiranam Newspaper Clipping — National Librarians Day",
+    heading: "NATIONAL LIBRARIANS DAY & BOOK EXHIBITION",
+    subject:
+      "Akshara Kiranam newspaper clipping of National Librarians Day 2024 at Dr. Y.S.R. Central Library, JNTU-GV Vizianagaram",
+    references: [
+      "Akshara Kiranam (www.aksharakiranam.com)",
+      "Dr. Y.S.R. Central Library, JNTU-GV CEV",
+      "AICTE Supported Book Exhibition",
+    ],
+    schedule: [],
+    notes: [
+      "The programme was held in the presence of college and university officials, including Principal Prof. Kota Chandra Bhushan Rao, Vice-Chancellor Prof. V.V. Subba Rao, Registrar Prof. D. Rajya Lakshmi, AICTE Coordinator Prof. K. Srinivasa Prasad, and Library Officer In-charge D.V.V. Shivaram Rolangi.",
+      "Source: Akshara Kiranam (www.aksharakiranam.com). Used as press coverage of the college event.",
+    ],
+    signedBy: "Dr. Y.S.R. Central Library & Public Relations Cell\nJNTU-GV CEV",
+    imageUrl:
+      "https://jntugvcev.edu.in/wp-content/uploads/2026/08/national-librarians-day-2024-akshara-kiranam-750x410.jpg",
+    sourceUrl: "https://www.aksharakiranam.com/",
+    sourceName: "Akshara Kiranam",
+  },
+];
 
 // ── Official Supplied Videos Dataset ──
 export const VIDEOS: VideoItem[] = [

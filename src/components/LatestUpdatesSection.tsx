@@ -467,12 +467,20 @@ export function LatestUpdatesSection() {
                         >
                           <div>
                             <div className="flex items-start gap-4 sm:gap-5 mb-5">
-                              <div className="shrink-0 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-2xl bg-white border border-slate-200/90 p-1.5 sm:p-2 shadow-xs flex items-center justify-center group-hover:scale-105 transition-transform">
-                                <img
-                                  src="/logo-circle.png"
-                                  alt="JNTU-GV University Emblem"
-                                  className="w-full h-full object-contain"
-                                />
+                              <div className="shrink-0 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-2xl bg-white border border-slate-200/90 p-1.5 sm:p-2 shadow-xs flex items-center justify-center group-hover:scale-105 transition-transform overflow-hidden">
+                                {currentNote.imageUrl ? (
+                                  <img
+                                    src={currentNote.imageUrl}
+                                    alt={currentNote.title}
+                                    className="w-full h-full object-cover rounded-xl"
+                                  />
+                                ) : (
+                                  <img
+                                    src="/logo-circle.png"
+                                    alt="JNTU-GV University Emblem"
+                                    className="w-full h-full object-contain"
+                                  />
+                                )}
                               </div>
 
                               <div className="flex-1 min-w-0">
@@ -498,6 +506,16 @@ export function LatestUpdatesSection() {
                                 </h3>
                               </div>
                             </div>
+
+                            {currentNote.imageUrl && (
+                              <div className="mb-4 rounded-2xl overflow-hidden border border-slate-200/80 shadow-xs max-h-48 w-full bg-slate-100/60">
+                                <img
+                                  src={currentNote.imageUrl}
+                                  alt={currentNote.title}
+                                  className="w-full h-48 object-cover object-top group-hover:scale-[1.02] transition-transform duration-300"
+                                />
+                              </div>
+                            )}
 
                             <p className="text-sm sm:text-[15px] text-muted-foreground leading-relaxed font-normal line-clamp-3 pl-0 sm:pl-1">
                               {currentNote.excerpt}
