@@ -80,7 +80,7 @@ const NOTICES = [
 export function NoticeTicker() {
   return (
     <div className="w-full bg-[#0A192F] border-b border-blue-900/40 text-white relative z-30 shadow-sm">
-      <div className="max-w-7xl mx-auto px-2 sm:px-4 flex items-center h-10 overflow-hidden marquee-container">
+      <div className="w-full px-3 sm:px-6 lg:px-8 xl:px-12 flex items-center h-10 overflow-hidden marquee-container">
         
         {/* UPDATES Pill Button */}
         <Link

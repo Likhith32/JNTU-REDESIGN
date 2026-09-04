@@ -54,7 +54,7 @@ export function TopRibbon() {
   return (
     <>
       <div className="w-full bg-[#0B254E] text-white/90 text-[10.5px] font-medium border-b border-blue-900/50 shadow-inner relative z-50 select-none">
-        <div className="max-w-7xl mx-auto px-2.5 sm:px-4 min-h-[30px] flex items-center justify-between gap-2 overflow-x-auto no-scrollbar py-0.5">
+        <div className="w-full max-w-[1920px] mx-auto px-3 sm:px-6 lg:px-8 xl:px-12 min-h-[30px] flex items-center justify-between gap-2 overflow-x-auto no-scrollbar py-0.5">
           {/* Left: Social Media Icons & Push Toggle */}
           <div className="flex items-center gap-2 shrink-0 pl-0.5">
             <a

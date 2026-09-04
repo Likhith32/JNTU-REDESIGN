@@ -47,7 +47,7 @@ export function HeaderBanner() {
       </div>
 
       {/* DESKTOP FULL BANNER (>= 768px) */}
-      <div className="hidden md:block max-w-7xl mx-auto px-4 lg:px-6 py-2">
+      <div className="hidden md:block w-full max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 py-2">
         <div className="flex flex-row items-center justify-between gap-4 text-left">
           
           {/* Left: Official College Emblem */}

@@ -45,7 +45,7 @@ export function HeroSlideshow({
 
 
   return (
-    <div className="relative overflow-hidden" style={{ minHeight }}>
+    <div className="relative overflow-hidden flex flex-col justify-center" style={{ minHeight }}>
       {/* Layered images crossfade */}
       <div className="absolute inset-0">
         {images.map((img, i) => {
@@ -75,21 +75,21 @@ export function HeroSlideshow({
 
       {/* Slide indicators */}
       {images.length > 1 && (
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">
+        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">
           {images.map((_, i) => (
             <button
               key={i}
               onClick={() => setActive(i)}
               aria-label={`Slide ${i + 1}`}
               className={`h-1 rounded-full transition-all duration-200 cursor-pointer ${
-                i === active ? "w-8 bg-white" : "w-3 bg-white/40 hover:bg-white/70"
+                i === active ? "w-8 bg-white shadow-sm" : "w-3 bg-white/40 hover:bg-white/70"
               }`}
             />
           ))}
         </div>
       )}
 
-      <div className="relative z-10 h-full">{children}</div>
+      <div className="relative z-10 w-full h-full flex flex-col justify-center">{children}</div>
     </div>
   );
 }

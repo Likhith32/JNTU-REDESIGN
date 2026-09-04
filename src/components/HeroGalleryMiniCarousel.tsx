@@ -249,7 +249,7 @@ export function HeroGalleryMiniCarousel({
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
-            className="w-full max-w-[480px] sm:max-w-[520px] lg:max-w-[540px] xl:max-w-[560px] rounded-3xl overflow-hidden bg-white/20 backdrop-blur-2xl border border-white/35 shadow-[0_20px_60px_rgba(0,0,0,0.35)] text-white group"
+            className="w-full max-w-[480px] sm:max-w-[520px] lg:max-w-[540px] xl:max-w-[580px] 2xl:max-w-[660px] 3xl:max-w-[720px] rounded-3xl overflow-hidden bg-white/20 backdrop-blur-2xl border border-white/35 shadow-[0_20px_60px_rgba(0,0,0,0.35)] text-white group"
           >
             {/* Top Light Glassmorphic Header without slide numbers */}
             <div className="flex items-center justify-between px-4 py-3 bg-white/25 backdrop-blur-md border-b border-white/25">

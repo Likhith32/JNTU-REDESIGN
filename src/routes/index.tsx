@@ -28,7 +28,6 @@ const heroImg = "/images/hero-carousal/hero-campus.webp";
 const hero2 = "/images/hero-carousal/hero-2.webp";
 const hero3 = "/images/hero-carousal/hero-3.webp";
 const hero4 = "/images/hero-carousal/hero-4.webp";
-const hero5 = "/images/hero-carousal/hero-5.webp";
 const campusLifeImg = imageUrl("campus-life/campus-life.jpg");
 import hostelImg from "@/assets/hostel.jpg";
 import sportsImg from "@/assets/sports.jpg";
@@ -128,7 +127,7 @@ export const Route = createFileRoute("/")({
       {
         rel: "preload",
         as: "image",
-        href: hero5,
+        href: heroImg,
         fetchPriority: "high",
       },
     ],
@@ -339,17 +338,18 @@ function HomePage() {
       <section className="relative w-full overflow-hidden">
         <HeroSlideshow
           images={[
-            { src: hero5, alt: "JNTU-GV Vizianagaram Main Administration Building" },
+            { src: heroImg, alt: "JNTU-GV Vizianagaram Main Administration Building & Campus" },
             { src: "/images/independence_day.webp", alt: "80th Independence Day Celebrations at JNTU-GV" },
             { src: hero3, alt: "Students and Faculty at JNTU-GV Campus" },
             { src: hero4, alt: "Dr. Y.S.R. Central Knowledge Commons & Library" },
             { src: hero2, alt: "Campus Architecture and Laboratories" },
           ]}
           interval={6500}
+          minHeight="clamp(580px, calc(100svh - 150px), 760px)"
           overlay="linear-gradient(180deg, oklch(0.18 0.05 260 / 0.6) 0%, oklch(0.18 0.05 260 / 0.4) 40%, oklch(0.18 0.05 260 / 0.85) 100%)"
         >
-          <div className="container-narrow h-full min-h-[min(82vh,680px)] flex flex-col justify-center pt-14 sm:pt-20 pb-10 text-white">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
+          <div className="w-full max-w-7xl 2xl:max-w-[1536px] 3xl:max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12 h-full flex flex-col justify-center pt-14 sm:pt-20 pb-12 text-white">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
               {/* Left Column: Hero Typography & Actions */}
               <div className="lg:col-span-6 xl:col-span-6 flex flex-col justify-center">
                 <div className="text-eyebrow !text-cyan-300 animate-[fade-up_0.3s_ease-out_0.3s_both] flex items-center gap-2.5 font-bold tracking-wider">
@@ -361,13 +361,13 @@ function HomePage() {
                   <span>ESTABLISHED IN 2007</span>
                 </div>
 
-                <h1 className="text-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold mt-2.5 max-w-4xl animate-[fade-up_0.4s_ease-out_0.5s_both] leading-[1.08] tracking-tight">
+                <h1 className="text-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl 2xl:text-8xl font-extrabold mt-2.5 max-w-4xl 2xl:max-w-5xl animate-[fade-up_0.4s_ease-out_0.5s_both] leading-[1.08] tracking-tight">
                   Engineering tomorrow,
                   <br />
                   <span>together.</span>
                 </h1>
 
-                <p className="mt-3.5 text-sm sm:text-base md:text-lg text-white/90 max-w-2xl leading-relaxed animate-[fade-up_0.4s_ease-out_0.8s_both] font-normal">
+                <p className="mt-3.5 text-sm sm:text-base md:text-lg 2xl:text-xl text-white/90 max-w-2xl 2xl:max-w-3xl leading-relaxed animate-[fade-up_0.4s_ease-out_0.8s_both] font-normal">
                   A constituent college of JNTU-GV, approved by AICTE New Delhi, and recognized by UGC
                   under section 2(f) & 12(B) of UGC Act 1956 — shaping the future of engineering since 2007.
                 </p>
@@ -393,7 +393,7 @@ function HomePage() {
           </div>
         </HeroSlideshow>
 
-        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 text-white/60 text-[10px] uppercase tracking-[0.3em] flex flex-col items-center gap-1 animate-[float_3s_ease-in-out_infinite] z-20 pointer-events-none hidden sm:flex">
+        <div className="absolute bottom-9 left-1/2 -translate-x-1/2 text-white/70 text-[10px] uppercase tracking-[0.3em] flex flex-col items-center gap-1 animate-[float_3s_ease-in-out_infinite] z-20 pointer-events-none hidden sm:flex">
           <span>Scroll</span>
           <ArrowDown className="h-3.5 w-3.5" />
         </div>
