@@ -24,10 +24,9 @@ import {
 } from "lucide-react";
 import { imageUrl } from "@/lib/assets";
 
-const heroImg = "/images/hero-carousal/hero-campus.webp";
-const hero2 = "/images/hero-carousal/hero-2.webp";
-const hero3 = "/images/hero-carousal/hero-3.webp";
-const hero4 = "/images/hero-carousal/hero-4.webp";
+const hero1 = "/images/independence_day.webp";
+const hero2 = "/images/hero-carousal/hero-3.webp";
+const hero3 = "/images/hero-carousal/hero-4.webp";
 const campusLifeImg = imageUrl("campus-life/campus-life.jpg");
 import hostelImg from "@/assets/hostel.jpg";
 import sportsImg from "@/assets/sports.jpg";
@@ -127,7 +126,7 @@ export const Route = createFileRoute("/")({
       {
         rel: "preload",
         as: "image",
-        href: heroImg,
+        href: hero1,
         fetchPriority: "high",
       },
     ],
@@ -338,11 +337,9 @@ function HomePage() {
       <section className="relative w-full overflow-hidden">
         <HeroSlideshow
           images={[
-            { src: heroImg, alt: "JNTU-GV Vizianagaram Main Administration Building & Campus" },
-            { src: "/images/independence_day.webp", alt: "80th Independence Day Celebrations at JNTU-GV" },
-            { src: hero3, alt: "Students and Faculty at JNTU-GV Campus" },
-            { src: hero4, alt: "Dr. Y.S.R. Central Knowledge Commons & Library" },
-            { src: hero2, alt: "Campus Architecture and Laboratories" },
+            { src: hero1, alt: "80th Independence Day Celebrations at JNTU-GV" },
+            { src: hero2, alt: "Students and Faculty at JNTU-GV Campus" },
+            { src: hero3, alt: "Dr. Y.S.R. Central Knowledge Commons & Library" },
           ]}
           interval={6500}
           minHeight="clamp(580px, calc(100svh - 150px), 760px)"
