@@ -86,11 +86,11 @@ export const Route = createRootRoute({
       },
       {
         property: "og:image",
-        content: "https://jntugvcev.edu.in/logo-circle.png",
+        content: "http://89.116.134.182/logo-circle.png",
       },
       {
         name: "twitter:image",
-        content: "https://jntugvcev.edu.in/logo-circle.png",
+        content: "http://89.116.134.182/logo-circle.png",
       },
     ],
     links: [

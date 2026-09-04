@@ -166,19 +166,19 @@ const DOWNLOADS = [
   {
     title: "AICTE Anti-Ragging Notification (2009)",
     desc: "AICTE (Prevention and Prohibition of Ragging in Technical Institutions) Regulations.",
-    link: "https://jntuhcej.ac.in/downloads/AICTE_Antiragging_2009.pdf",
+    link: "http://89.116.134.182/local-assets/uploads/2026/08/AICTE_Antiragging_2009.pdf",
     tag: "AICTE Regulation",
   },
   {
     title: "UGC Regulations on Curbing the Menace of Ragging",
     desc: "UGC Regulations on Curbing the Menace of Ragging in Higher Educational Institutions.",
-    link: "https://jntugvcev.edu.in//wp-content/uploads/2020/08/2_ugc_Anti_Ragging_2009.pdf",
+    link: "http://89.116.134.182/local-assets/uploads/2020/08/2_ugc_Anti_Ragging_2009.pdf",
     tag: "UGC Notification",
   },
   {
     title: "Anti-Ragging Affidavit (Proforma)",
     desc: "Mandatory undertaking proforma to be submitted by every student and parent/guardian.",
-    link: "https://jntugvcev.edu.in//wp-content/uploads/2020/08/Anti_Ragging_Affidavitproforma.pdf",
+    link: "http://89.116.134.182/local-assets/uploads/2020/08/Anti_Ragging_Affidavitproforma.pdf",
     tag: "Affidavit Proforma",
   },
 ];

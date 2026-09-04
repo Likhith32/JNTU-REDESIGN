@@ -77,19 +77,19 @@ const STATUTORY_DOWNLOADS = [
   {
     title: "Right to Information Act, 2005 (Official)",
     desc: "Complete statutory notification and guidelines for citizen information requests.",
-    link: "https://jntugvcev.edu.in//wp-content/uploads/2021/02/rti-act.pdf",
+    link: "http://89.116.134.182/local-assets/uploads/2021/02/rti-act.pdf",
     category: "RTI Act",
   },
   {
     title: "JNTU Act (Act No. 30 of 2008)",
     desc: "The legislative foundation establishing Jawaharlal Nehru Technological University.",
-    link: "https://jntugvcev.edu.in//wp-content/uploads/2021/03/JNTUACT-compressed.pdf",
+    link: "http://89.116.134.182/local-assets/uploads/2021/03/JNTUACT-compressed.pdf",
     category: "University Act",
   },
   {
     title: "Government Order (GO MS. No. 14 HE)",
     desc: "Higher Education establishment order for the university college.",
-    link: "https://jntugvcev.edu.in//wp-content/uploads/2021/03/13022019HE_MS14.pdf",
+    link: "http://89.116.134.182/local-assets/uploads/2021/03/13022019HE_MS14.pdf",
     category: "Government Order",
   },
 ];
