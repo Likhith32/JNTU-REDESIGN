@@ -98,7 +98,7 @@ async function seed() {
       "Research is to see what everybody else has seen, and to think what nobody else has thought.",
     message:
       "JNTUK-UCEV strives towards inculcating research culture among its students and faculty by encouraging multi-disciplinary research activities in pace with global standards...",
-    image: "https://jntugvcev.edu.in/wp-content/uploads/2020/08/Dr.-G.-J.-Naga-Raju1.png",
+    image: "https://jntugvcev.edu.in/local-assets/uploads/images/administration/Dr-G-J-NAGA-RAJU-latest.jpg",
   });
 
   await db.insert(rdMotto).values([

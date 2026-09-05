@@ -18,6 +18,11 @@ export const getAssetUrl = (
   let resolvedUrl: string;
 
   if (
+    trimmedPath.includes("Dr-G-J-NAGA-RAJU-latest.jpg") ||
+    trimmedPath.includes("Dr.-G.-J.-Naga-Raju")
+  ) {
+    resolvedUrl = `${BASE}/uploads/images/administration/Dr-G-J-NAGA-RAJU-latest.jpg`;
+  } else if (
     trimmedPath.startsWith("data:") ||
     trimmedPath.startsWith("/src/") ||
     trimmedPath.startsWith("/assets/") ||
@@ -50,7 +55,8 @@ export const getAssetUrl = (
       "independence_day.webp": "/images/independence_day.webp",
       "independence_day.jpeg": "/images/independence_day.webp",
       "independence-day-2026.jpg": "/images/independence_day.webp",
-      "Dr.-G.-J.-Naga-Raju1.png": `${BASE}/images/administration/Dr-G-J-NAGA-RAJU-latest.jpg`,
+      "Dr.-G.-J.-Naga-Raju1.png": `${BASE}/uploads/images/administration/Dr-G-J-NAGA-RAJU-latest.jpg`,
+      "Dr-G-J-NAGA-RAJU-latest.jpg": `${BASE}/uploads/images/administration/Dr-G-J-NAGA-RAJU-latest.jpg`,
       "logo.jpeg": "/logo-circle.png",
       // Department banner instant local fallbacks
       "cse-banner.jpg": `${BASE}/uploads/departments/banners/cse-banner.jpg`,

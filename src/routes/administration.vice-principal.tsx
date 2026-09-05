@@ -91,7 +91,7 @@ function VicePrincipalPage() {
                     />
                   ) : (
                     <img decoding="async" loading="lazy"
-                      src={getAssetUrl(data.image)}
+                      src={getAssetUrl(data.image || "https://jntugvcev.edu.in/local-assets/uploads/images/administration/Dr-G-J-NAGA-RAJU-latest.jpg")}
                       alt={data.name}
                       className="h-full w-full object-cover transition-all duration-700"
                     />
