@@ -18,9 +18,9 @@ jobs:
           port: 22
           script: |
             export PATH=$PATH:/root/.bun/bin:/usr/local/bin
-            cd /var/www/jntu
+            cd /var/www/JNTU-REDESIGN
             git pull origin main
             bun install
             bun run build
-            pm2 reload jntu-redesign || pm2 start "node dist/server/index.js" --name jntu-redesign
+            pm2 reload jntu-website || pm2 restart jntu-website
             pm2 save
