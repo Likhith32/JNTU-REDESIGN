@@ -66,6 +66,8 @@ export const getAssetUrl = (
   "mech-banner.jpg": `${BASE}/uploads/departments/banners/mech-banner.jpg`,
   "met-banner.jpg": `${BASE}/uploads/departments/banners/met-banner.jpg`,
   "sh-banner.jpg": `${BASE}/uploads/departments/banners/sh-banner.jpg`,
+  "bshss-banner.jpg": `${BASE}/uploads/departments/banners/sh-banner.jpg`,
+  "bsh-banner.jpg": `${BASE}/uploads/departments/banners/sh-banner.jpg`,
   "mba-banner.jpg": `${BASE}/uploads/departments/banners/mba-banner.jpg`,
     };
 

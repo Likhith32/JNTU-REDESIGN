@@ -200,7 +200,7 @@ const CAMPUS_KEYWORDS = new Set([
   "supply", "backlog", "mid", "end sem",
   // Departments
   "department", "branch", "cse", "ece", "eee", "mech", "mechanical", "met",
-  "metallurg", "it", "civil", "mba", "mca", "bsh",
+  "metallurg", "it", "civil", "mba", "mca", "bsh", "bshss",
   // People
   "principal", "vice principal", "hod", "faculty", "professor", "teacher",
   "staff", "lecturer", "registrar", "chancellor", "vice chancellor",

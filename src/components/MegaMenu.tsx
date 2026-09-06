@@ -429,47 +429,43 @@ export function MegaMenu() {
             </div>
           </div>
         </div>
-      </div>
-
-      {/*
+      </div>      {/*
         MOBILE FULL-SCREEN DRAWER
         ------------------------------------------------------------------
-        This is intentionally rendered OUTSIDE the `islandRef` pill and uses
-        `fixed inset-0`, so it:
-          1) Always covers the full viewport, wherever the user scrolled to
-             when they tapped the menu button (fixes "opens at top of page").
-          2) Is never squeezed by the pill's own auto width/flex layout, so
-             labels and descriptions no longer get cut off mid-word.
-          3) Gets its own sticky header (logo + close button) so the user
-             always has an obvious, reachable way to close it.
+        Rendered outside islandRef with fixed inset-0 and dynamic safe area.
+        Styled with the university theme's crisp light background and royal blue
+        accents to seamlessly match the website color palette.
       */}
       {mobileOpen && (
         <div
           ref={mobileDrawerRef}
-          className="lg:hidden fixed inset-0 z-[100] bg-slate-950/98 backdrop-blur-xl flex flex-col animate-[fade-in_0.15s_ease-out] pointer-events-auto"
+          className="lg:hidden fixed inset-0 z-[100] bg-slate-50 flex flex-col animate-[fade-in_0.15s_ease-out] pointer-events-auto h-screen h-[100dvh]"
           role="dialog"
           aria-modal="true"
           aria-label="Mobile navigation menu"
         >
-          {/* Drawer header — always visible, always at the top of the screen */}
-          <div className="flex items-center justify-between px-4 py-3.5 border-b border-white/10 shrink-0 bg-slate-900/60">
-            <Link to="/" className="flex items-center gap-2" onClick={closeAll}>
-              <div className="rounded-full bg-white/10 p-1.5 border border-white/20 text-cyan-300">
+          {/* Drawer header — prestigious royal navy banner with logo & close action */}
+          <div className="flex items-center justify-between px-4 py-3.5 border-b border-blue-900/30 shrink-0 bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 shadow-md">
+            <Link to="/" className="flex items-center gap-2.5" onClick={closeAll}>
+              <div className="rounded-xl bg-blue-600/30 p-1.5 border border-blue-400/40 text-cyan-300 shadow-xs">
                 <Home className="h-4 w-4" />
               </div>
-              <span className="text-sm font-extrabold text-white tracking-wide">JNTU-GV CEV</span>
+              <div className="flex flex-col text-left">
+                <span className="text-sm font-extrabold text-white tracking-wide leading-tight">JNTU-GV CEV</span>
+                <span className="text-[10px] text-blue-200/80 font-medium leading-tight mt-0.5">College of Engineering</span>
+              </div>
             </Link>
             <button
-              className="p-2 text-white rounded-full bg-white/10 hover:bg-white/20 active:scale-95 transition-transform cursor-pointer"
+              className="p-2 text-white/90 hover:text-white rounded-xl bg-white/10 hover:bg-white/20 active:scale-95 transition-transform cursor-pointer border border-white/15"
               onClick={closeAll}
               aria-label="Close menu"
             >
-              <X className="h-5 w-5 text-cyan-300" />
+              <X className="h-5 w-5 text-white" />
             </button>
           </div>
 
           {/* Scrollable body */}
-          <div className="flex-1 overflow-y-auto overscroll-contain no-scrollbar px-3 pt-3 pb-8 pointer-events-auto touch-pan-y">
+          <div className="flex-1 overflow-y-auto overscroll-contain no-scrollbar px-3.5 pt-3.5 pb-[calc(2.5rem+env(safe-area-inset-bottom,0px))] pointer-events-auto touch-pan-y bg-slate-50">
             <div className="space-y-3">
               {/* 1. Quick Category Chips Scroll Bar */}
               <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1 pt-0.5 px-0.5 pointer-events-auto touch-pan-x flex-nowrap">
@@ -487,9 +483,9 @@ export function MegaMenu() {
                           }, 60);
                         }
                       }}
-                      className={`shrink-0 px-3.5 py-2 rounded-full text-xs font-extrabold transition-all flex items-center gap-1.5 border cursor-pointer ${isActive
-                          ? "bg-primary text-white border-primary-glow shadow-md"
-                          : "bg-white/10 text-white/90 border-white/15 hover:bg-white/20"
+                      className={`shrink-0 px-3.5 py-2 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 border cursor-pointer active:scale-95 ${isActive
+                          ? "bg-gradient-to-r from-blue-700 to-indigo-700 text-white font-extrabold border-transparent shadow-md shadow-blue-500/20"
+                          : "bg-white text-slate-700 border-slate-200/90 hover:border-blue-300 hover:text-blue-700 shadow-2xs"
                         }`}
                     >
                       <span>{item.label}</span>
@@ -504,13 +500,15 @@ export function MegaMenu() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={closeAll}
-                className="flex items-center justify-between py-3 px-4 text-xs font-bold text-primary-glow rounded-xl bg-white/5 border border-white/10 active:scale-[0.98] transition-all"
+                className="flex items-center justify-between py-3 px-4 text-xs font-bold text-blue-900 rounded-2xl bg-gradient-to-r from-blue-50 via-indigo-50/50 to-blue-50 border border-blue-200/80 shadow-2xs hover:border-blue-300 active:scale-[0.98] transition-all"
               >
-                <div className="flex items-center gap-2">
-                  <FileText className="h-4 w-4 text-cyan-300 shrink-0" />
+                <div className="flex items-center gap-2.5">
+                  <div className="w-7 h-7 rounded-lg bg-blue-600 text-white flex items-center justify-center shadow-2xs">
+                    <FileText className="h-4 w-4" />
+                  </div>
                   <span>UGC 2(f) & 12(B) Certificate</span>
                 </div>
-                <ArrowRight className="h-3.5 w-3.5 shrink-0" />
+                <ArrowRight className="h-4 w-4 text-blue-600 shrink-0" />
               </a>
 
               {/* 3. Dynamic NAV Categories */}
@@ -523,13 +521,15 @@ export function MegaMenu() {
                         key={item.label}
                         to={item.to}
                         onClick={closeAll}
-                        className="flex items-center justify-between py-3.5 px-4 text-sm font-bold text-white rounded-xl bg-white/5 hover:bg-white/10 active:scale-[0.98] transition-all border border-white/10"
+                        className="flex items-center justify-between py-3.5 px-4 text-sm font-bold text-slate-800 rounded-2xl bg-white hover:bg-slate-50 active:scale-[0.98] transition-all border border-slate-200/80 shadow-2xs"
                       >
-                        <div className="flex items-center gap-2.5">
-                          <Home className="h-4.5 w-4.5 text-cyan-300 shrink-0" />
+                        <div className="flex items-center gap-3">
+                          <div className="w-7 h-7 rounded-lg bg-blue-50 border border-blue-200/60 text-blue-700 flex items-center justify-center">
+                            <Home className="h-4 w-4 shrink-0" />
+                          </div>
                           <span>{item.label}</span>
                         </div>
-                        <ChevronRight className="h-4 w-4 text-white/40 shrink-0" />
+                        <ChevronRight className="h-4 w-4 text-slate-400 shrink-0" />
                       </Link>
                     );
                   }
@@ -544,8 +544,8 @@ export function MegaMenu() {
                       id={`mobile-cat-${item.label}`}
                       key={item.label}
                       className={`rounded-2xl border transition-all duration-200 overflow-hidden ${isExpanded
-                          ? "bg-white/[0.08] border-primary-glow/40 shadow-xl"
-                          : "bg-white/5 border-white/10"
+                          ? "bg-white border-blue-500/70 shadow-md shadow-blue-500/5 ring-1 ring-blue-500/20"
+                          : "bg-white border-slate-200/90 shadow-2xs hover:border-slate-300"
                         }`}
                     >
                       {/* Category Accordion Header */}
@@ -553,29 +553,30 @@ export function MegaMenu() {
                         onClick={() =>
                           setExpandedMobileCategory(isExpanded ? null : item.label)
                         }
-                        className="w-full flex items-center justify-between py-3.5 px-4 text-sm font-bold text-white transition-colors text-left cursor-pointer"
+                        className={`w-full flex items-center justify-between py-3.5 px-4 text-left cursor-pointer transition-colors ${isExpanded ? "bg-blue-50/40" : "hover:bg-slate-50/60"
+                          }`}
                       >
                         <div className="flex items-center gap-2.5 min-w-0">
-                          <span className="text-primary-glow font-black text-base">{item.label}</span>
+                          <span className="text-slate-900 font-extrabold text-[15px]">{item.label}</span>
                           {allItemsCount > 0 && (
-                            <span className="px-2.5 py-0.5 text-[10px] font-extrabold rounded-full bg-white/15 text-white/90 shrink-0">
+                            <span className="px-2.5 py-0.5 text-[10px] font-bold rounded-full bg-blue-50 text-blue-700 border border-blue-200/60 shrink-0">
                               {allItemsCount} items
                             </span>
                           )}
                         </div>
                         <ChevronDown
-                          className={`h-4.5 w-4.5 text-white/70 transition-transform duration-300 shrink-0 ${isExpanded ? "rotate-180 text-primary-glow" : ""
+                          className={`h-4.5 w-4.5 transition-transform duration-300 shrink-0 ${isExpanded ? "rotate-180 text-blue-600" : "text-slate-400"
                             }`}
                         />
                       </button>
 
                       {/* Collapsible Content */}
                       {isExpanded && (
-                        <div className="px-3 pb-4 pt-1 space-y-3 border-t border-white/10 animate-[fade-in_0.15s_ease-out]">
+                        <div className="px-3 pb-3.5 pt-1 space-y-3 border-t border-slate-100 bg-slate-50/60 animate-[fade-in_0.15s_ease-out]">
                           {/* Groups */}
                           {item.groups?.map((g) => (
                             <div key={g.title} className="space-y-1.5">
-                              <div className="text-[10px] uppercase tracking-[0.2em] font-black text-cyan-300 px-2 pt-2">
+                              <div className="text-[10px] uppercase tracking-[0.18em] font-black text-blue-700 px-2 pt-1.5">
                                 {g.title}
                               </div>
                               <div className="grid grid-cols-1 gap-1.5">
@@ -586,22 +587,22 @@ export function MegaMenu() {
                                       key={it.label}
                                       to={it.to}
                                       onClick={closeAll}
-                                      className="flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/15 active:scale-[0.98] transition-all border border-white/5"
+                                      className="flex items-center gap-3 p-2.5 rounded-xl bg-white hover:bg-blue-50/80 active:scale-[0.98] transition-all border border-slate-200/70 hover:border-blue-200 shadow-2xs group/sub"
                                     >
-                                      <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-cyan-200 shrink-0">
+                                      <div className="w-8 h-8 rounded-lg bg-blue-50 border border-blue-200/60 text-blue-700 group-hover/sub:bg-blue-600 group-hover/sub:text-white group-hover/sub:border-blue-600 flex items-center justify-center shrink-0 transition-colors shadow-2xs">
                                         <ItemIcon className="w-4 h-4" />
                                       </div>
                                       <div className="min-w-0 flex-1">
-                                        <div className="text-xs font-bold text-white leading-tight break-words">
+                                        <div className="text-xs font-bold text-slate-800 group-hover/sub:text-blue-900 leading-tight break-words">
                                           {it.label}
                                         </div>
                                         {it.desc && (
-                                          <div className="text-[10px] text-white/60 leading-tight mt-0.5 break-words">
+                                          <div className="text-[10px] text-slate-500 group-hover/sub:text-slate-600 leading-tight mt-0.5 break-words line-clamp-1">
                                             {it.desc}
                                           </div>
                                         )}
                                       </div>
-                                      <ChevronRight className="w-4 h-4 text-white/30 shrink-0" />
+                                      <ChevronRight className="w-3.5 h-3.5 text-slate-300 group-hover/sub:text-blue-600 group-hover/sub:translate-x-0.5 transition-all shrink-0 ml-auto" />
                                     </Link>
                                   );
                                 })}
@@ -619,31 +620,31 @@ export function MegaMenu() {
                                     <Link
                                       to={it.to}
                                       onClick={closeAll}
-                                      className="flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/15 active:scale-[0.98] transition-all border border-white/5"
+                                      className="flex items-center gap-3 p-2.5 rounded-xl bg-white hover:bg-blue-50/80 active:scale-[0.98] transition-all border border-slate-200/70 hover:border-blue-200 shadow-2xs group/sub"
                                     >
-                                      <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-cyan-200 shrink-0">
+                                      <div className="w-8 h-8 rounded-lg bg-blue-50 border border-blue-200/60 text-blue-700 group-hover/sub:bg-blue-600 group-hover/sub:text-white group-hover/sub:border-blue-600 flex items-center justify-center shrink-0 transition-colors shadow-2xs">
                                         <ItemIcon className="w-4 h-4" />
                                       </div>
                                       <div className="min-w-0 flex-1">
-                                        <div className="text-xs font-bold text-white leading-tight break-words">
+                                        <div className="text-xs font-bold text-slate-800 group-hover/sub:text-blue-900 leading-tight break-words">
                                           {it.label}
                                         </div>
                                         {it.desc && (
-                                          <div className="text-[10px] text-white/60 leading-tight mt-0.5 break-words">
+                                          <div className="text-[10px] text-slate-500 group-hover/sub:text-slate-600 leading-tight mt-0.5 break-words line-clamp-1">
                                             {it.desc}
                                           </div>
                                         )}
                                       </div>
-                                      <ChevronRight className="w-4 h-4 text-white/30 shrink-0" />
+                                      <ChevronRight className="w-3.5 h-3.5 text-slate-300 group-hover/sub:text-blue-600 group-hover/sub:translate-x-0.5 transition-all shrink-0 ml-auto" />
                                     </Link>
                                     {it.children && (
-                                      <div className="pl-6 space-y-1 border-l-2 border-white/15 ml-3">
+                                      <div className="pl-5 space-y-1 border-l-2 border-blue-200 ml-4 py-1">
                                         {it.children.map((child) => (
                                           <Link
                                             key={child.label}
                                             to={child.to}
                                             onClick={closeAll}
-                                            className="block py-2 px-3 rounded-lg text-xs text-white/70 hover:text-white hover:bg-white/10 transition-colors"
+                                            className="block py-1.5 px-3 rounded-lg text-xs font-semibold text-slate-600 hover:text-blue-700 hover:bg-blue-50 transition-colors"
                                           >
                                             {child.label}
                                           </Link>

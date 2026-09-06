@@ -31,8 +31,11 @@ export const getDepartmentDetails = createServerFn({ method: "GET" })
 
       const { sql } = await import("@/lib/db");
 
-      // 1. Fetch the main department row
-      const result = await sql`SELECT * FROM departments WHERE slug = ${slug} LIMIT 1`;
+      // 1. Fetch the main department row (with fallback for legacy aliases)
+      let result = await sql`SELECT * FROM departments WHERE slug = ${slug} LIMIT 1`;
+      if ((!result || result.length === 0) && (slug === "sh" || slug === "bsh")) {
+        result = await sql`SELECT * FROM departments WHERE slug = 'bshss' LIMIT 1`;
+      }
 
       // 2. CHECK: If no row is returned, the array length is 0
       if (!result || result.length === 0) {

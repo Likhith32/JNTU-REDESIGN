@@ -160,8 +160,8 @@ function FacultyPage() {
   };
 
   // UI Segmentation Logic: Isolate HOD from remaining profiles
-  const hodMember = facultyList.find(f => f.designation?.toLowerCase().includes("hod"));
-  const otherFaculty = facultyList.filter(f => !f.designation?.toLowerCase().includes("hod"));
+  const hodMember = facultyList.find(f => /hod|head of (the )?department/i.test(f.designation || ""));
+  const otherFaculty = facultyList.filter(f => !/hod|head of (the )?department/i.test(f.designation || ""));
 
   return (
     <div className="animate-in fade-in duration-200">

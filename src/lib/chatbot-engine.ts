@@ -78,7 +78,7 @@ const INTENT_PATTERNS: Array<{ intent: Intent; pattern: RegExp }> = [
   { intent: "vice_principal",pattern: /\b(vice.?principal|vp\b|vice principal)\b/i },
   { intent: "leadership",    pattern: /\b(leadership|management|governing body|administration|officials)\b/i },
   { intent: "hod",           pattern: /\b(hod|hods|head of department|head of the department|head of dept|heads of department|department head)\b/i },
-  { intent: "department",    pattern: /\b(department|branch|program|stream|course|cse|ece|eee|mba|mechanical|metallurg|civil|it\b|information technology|sciences|humanities|bsh|s&h|what departments|which branches|how many branch)\b/i },
+  { intent: "department",    pattern: /\b(department|branch|program|stream|course|cse|ece|eee|mba|mechanical|metallurg|civil|it\b|information technology|sciences|humanities|bsh|bshss|s&h|what departments|which branches|how many branch)\b/i },
   { intent: "hostel",        pattern: /\b(hostel|accommodation|warden|mess|room|dormitory|boys hostel|girls hostel|residential|stay in campus)\b/i },
   { intent: "library",       pattern: /\b(library|book|journal|digital library|e-resource|librarian|reading room|nlist|ieee)\b/i },
   { intent: "placement",     pattern: /\b(placement|recruit|package|salary|tpo|campus drive|internship|job|lpa|offer|hire|placed|placement cell)\b/i },
@@ -401,7 +401,7 @@ function buildAnswer(
       /(\beee\b|electrical)/i.test(qLower) ? KB.hods.find(h => h.code === "EEE") :
       /(\bmech\b|mechanical)/i.test(qLower) ? KB.hods.find(h => h.code === "MECH") :
       /(\bmet\b|metallurg)/i.test(qLower) ? KB.hods.find(h => h.code === "MET") :
-      /(\bbsh\b|s&h|sciences|humanities)/i.test(qLower) ? KB.hods.find(h => h.code === "BSH") :
+      /(\bbsh\b|\bbshss\b|s&h|sciences|humanities)/i.test(qLower) ? KB.hods.find(h => h.code === "BSH") :
       /(\bmba\b|business)/i.test(qLower) ? KB.hods.find(h => h.code === "MBA") :
       null;
 

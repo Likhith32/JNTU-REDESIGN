@@ -57,6 +57,8 @@ export const triggerDatabaseIngest = createServerFn({ method: "POST" })
         met: "Dr. G. Swami Naidu",
         it: "Dr. P. Aruna Kumari",
         bsh: "Dr. G. J. Naga Raju",
+        bshss: "Dr. G. J. Naga Raju",
+        sh: "Dr. G. J. Naga Raju",
         mba: "Dr. K. V. S. M. Ramanesh",
       };
 

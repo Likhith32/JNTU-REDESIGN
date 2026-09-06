@@ -1,6 +1,6 @@
 import { createFileRoute, useLoaderData, useParams } from "@tanstack/react-router";
 import { type DepartmentData } from "@/functions/departments";
-import { getAssetUrl, updateDepartment } from "@/lib/departments";
+import { getAssetUrl, updateDepartment, STATIC_DEPARTMENTS } from "@/lib/departments";
 import { SafeImage } from "@/components/SafeImage";
 import { useAdmin } from "@/context/AdminContext";
 import { useState, useEffect } from "react";
@@ -18,12 +18,14 @@ import {
   MessageSquare
 } from "lucide-react";
 import { ProfileRenderer } from "@/components/ProfileRenderer";
+
 export const Route = createFileRoute("/departments/$id/hod")({
   head: ({ matches }) => {
     const parentMatch = matches.find((m) => (m.routeId as string) === "/departments/$id");
     const parentData = parentMatch?.loaderData as DepartmentData | undefined;
     const name = parentData?.name || "Department";
-    const hod = parentData?.hod || "Head of Department";
+    const hodFaculty = parentData?.faculty?.find((f) => /hod|head of (the )?department/i.test(f.designation || ""));
+    const hod = hodFaculty?.name || parentData?.hod || STATIC_DEPARTMENTS.find((d) => d.slug === parentData?.slug || d.id === parentData?.id)?.hod || "Head of Department";
     return {
       meta: [
         { title: `HOD Message — ${name} — JNTU-GV CEV` },
@@ -52,10 +54,20 @@ function HodPage() {
   // 3. Evaluate edit permissions using the active branch slug (e.g., "cse", "it")
   const isEditMode = isDeptEditing(routeSlug || "");
 
+  // 4. Resolve HOD faculty member and fallback data
+  const hodDetails = data?.faculty?.find((f) => /hod|head of (the )?department/i.test(f.designation || ""));
+  const staticDept = STATIC_DEPARTMENTS.find((d) => d.slug === data?.slug || d.id === data?.id);
+  const rawHodName = (hodDetails?.name || data?.hod || staticDept?.hod || "").trim();
+  const hodName = rawHodName || `Head of Department`;
+
+  const defaultEmail = data?.slug
+    ? `hod.${data.slug === "mech" ? "me" : data.slug === "bshss" ? "bs" : data.slug}@jntugvcev.edu.in`
+    : "";
+
   // Local state for editing HOD details
   const [editData, setEditData] = useState({
-    hod_photo: data?.hod_photo || "",
-    hod_contact: data?.hod_contact || "",
+    hod_photo: data?.hod_photo || hodDetails?.photo_url || "",
+    hod_contact: data?.hod_contact || hodDetails?.email || defaultEmail || "",
     hod_message: data?.hod_message || "",
   });
 
@@ -63,8 +75,8 @@ function HodPage() {
   useEffect(() => {
     if (data) {
       setEditData({
-        hod_photo: data.hod_photo || "",
-        hod_contact: data.hod_contact || "",
+        hod_photo: data.hod_photo || hodDetails?.photo_url || "",
+        hod_contact: data.hod_contact || hodDetails?.email || defaultEmail || "",
         hod_message: data.hod_message || "",
       });
     }
@@ -85,8 +97,8 @@ function HodPage() {
     </div>
   );
 
-  const hodDetails = data.faculty?.find((f) => f.designation.includes("HOD"));
-  const hodName = hodDetails ? hodDetails.name : `HOD, Dept of ${data.name}`;
+  const activePhoto = editData.hod_photo || data.hod_photo || hodDetails?.photo_url || "";
+  const displayContact = editData.hod_contact || data.hod_contact || hodDetails?.email || defaultEmail;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50">
@@ -137,11 +149,11 @@ function HodPage() {
                   <div className="relative inline-block">
                     <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-xl bg-white mx-auto">
                       <SafeImage
-                        src={editData.hod_photo}
+                        src={activePhoto}
                         alt={hodName}
                         fallbackName={hodName}
                         loading="lazy"
-    decoding="async"
+                        decoding="async"
                         className="h-full w-full object-cover"
                       />
                     </div>
@@ -180,16 +192,18 @@ function HodPage() {
                           placeholder="hod@jntugvcev.edu.in"
                         />
                       </div>
-                    ) : editData.hod_contact && (
+                    ) : displayContact && (
                       <a
-                        href={`mailto:${editData.hod_contact}`}
+                        href={`mailto:${displayContact}`}
                         className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl transition-all shadow-md"
                       >
                         <Mail size={18} />
                         <span className="font-medium">Email HOD</span>
                       </a>
                     )}
-                    <p className="text-xs text-slate-400 mt-3 break-all">{data.hod_contact}</p>
+                    {displayContact && !isEditMode && (
+                      <p className="text-xs text-slate-400 mt-3 break-all">{displayContact}</p>
+                    )}
                   </div>
                 </div>
               </div>

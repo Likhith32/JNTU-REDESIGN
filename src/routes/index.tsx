@@ -580,6 +580,8 @@ function HomePage() {
                 mech: "http://89.116.134.182/local-assets/uploads/departments/banners/mech-banner.jpg",
                 met: "http://89.116.134.182/local-assets/uploads/departments/banners/met-banner.jpg",
                 sh: "http://89.116.134.182/local-assets/uploads/departments/banners/sh-banner.jpg",
+                bsh: "http://89.116.134.182/local-assets/uploads/departments/banners/sh-banner.jpg",
+                bshss: "http://89.116.134.182/local-assets/uploads/departments/banners/sh-banner.jpg",
                 mba: "http://89.116.134.182/local-assets/uploads/departments/banners/mba-banner.jpg",
               };
 

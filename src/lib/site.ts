@@ -130,7 +130,7 @@ export const NAV: {
             { label: "Metallurgical Engineering", to: "/departments/met" },
             { label: "Information Technology", to: "/departments/it" },
             { label: "Master of Business Administration (MBA)", to: "/departments/mba" },
-            { label: "Basic Sciences and Humanities and Social Sciences (BS&HSS)", to: "/departments/sh" },
+            { label: "Basic Sciences and Humanities and Social Sciences (BS&HSS)", to: "/departments/bshss" },
           ],
         },
       ],
